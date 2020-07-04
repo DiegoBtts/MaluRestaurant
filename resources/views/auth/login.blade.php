@@ -4,9 +4,14 @@
 
 <div id="back"></div>
 
-<div class="login-log style-logo">
+<div class="style-logo">
     <a href="#" style="color: white !important">
-        <img id="Image-login" src="{{ asset('mpdf/resultados/example.png') }}" style="width: 90%">
+        <div class="login-log">
+            <img id=" Image-login" src="{{ asset('mpdf/resultados/example.png') }}" style="width: 100%; margin-left: auto;
+    margin-right: auto;
+    display: block;">
+        </div>
+
     </a>
 </div>
 

@@ -4,17 +4,16 @@
     left: 0;
     width: 100%;
     height: 100vh;
-    background: url(../img/plantilla/back1.jpg);
+    background: url(../img/plantilla/back1.jpeg);
     background-size: cover;
     overflow: hidden;
     z-index: -1;
 }
 
-.style-logo
-{
+.style-logo {
     background: #00000075;
-    width: 20%;
-    height: 22vh;
+    width: 30vh;
+    height: 23vh;
     margin: 10px;
 }
 
@@ -24,9 +23,8 @@
     font-size: 18px;
 }
 
-.list-group-item
-{
-  cursor: pointer;
+.list-group-item {
+    cursor: pointer;
 }
 
 .totalLetter {
@@ -37,15 +35,14 @@
     overflow: auto;
     overflow-x: hidden;
     height: 50vh;
-    width:100%;
+    width: 100%;
 }
 
-.search_list
-{
-    overflow:auto;
+.search_list {
+    overflow: auto;
     overflow-x: hidden;
     height: 20vh;
-    width:100%;
+    width: 100%;
 }
 
 .tableSell {
@@ -320,44 +317,44 @@ input[type="password"] {
 .login-log {
 }
 .Image-login {
-    width: 10px;
-    height: 20px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
-  
-
 
 .search_list p:not(:last-child) {
-  margin-bottom: 1rem;
+    margin-bottom: 1rem;
 }
 
 /* Tamaño del scroll */
 .search_list::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+    width: 8px;
+    height: 8px;
 }
 
- /* Estilos barra (thumb) de scroll */
+/* Estilos barra (thumb) de scroll */
 .search_list::-webkit-scrollbar-thumb {
-  background: #ccc;
-  border-radius: 4px;
+    background: #ccc;
+    border-radius: 4px;
 }
 
 .search_list::-webkit-scrollbar-thumb:active {
-  background-color: #999999;
+    background-color: #999999;
 }
 
 .search_list::-webkit-scrollbar-thumb:hover {
-  background: #b3b3b3;
-  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+    background: #b3b3b3;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
 }
 
- /* Estilos track de scroll */
+/* Estilos track de scroll */
 .search_list::-webkit-scrollbar-track {
-  background: #e1e1e1;
-  border-radius: 4px;
+    background: #e1e1e1;
+    border-radius: 4px;
 }
 
-.search_list::-webkit-scrollbar-track:hover, 
+.search_list::-webkit-scrollbar-track:hover,
 .search_list::-webkit-scrollbar-track:active {
-  background: #d4d4d4;
+    background: #d4d4d4;
 }
