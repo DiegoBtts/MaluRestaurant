@@ -1,0 +1,363 @@
+#back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: url(../img/plantilla/back1.jpg);
+    background-size: cover;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.style-logo
+{
+    background: #00000075;
+    width: 20%;
+    height: 22vh;
+    margin: 10px;
+}
+
+#backCard {
+}
+.pom {
+    font-size: 18px;
+}
+
+.list-group-item
+{
+  cursor: pointer;
+}
+
+.totalLetter {
+    font-size: 25px;
+}
+
+.tableScroll {
+    overflow: auto;
+    overflow-x: hidden;
+    height: 50vh;
+    width:100%;
+}
+
+.search_list
+{
+    overflow:auto;
+    overflow-x: hidden;
+    height: 20vh;
+    width:100%;
+}
+
+.tableSell {
+    font-size: 17px;
+}
+
+.button-add {
+    width: 100%;
+    min-height: 51vh;
+    border-radius: 10px;
+    color: #4184f3;
+    background: rgb(255, 255, 255);
+    border-color: rgb(65, 132, 243);
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.principal-container {
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 10px;
+    border-color: rgb(208, 208, 208);
+}
+
+.pull-right {
+    float: right;
+}
+
+.radio-moderate {
+    width: 0px !important;
+    margin-right: 0px;
+    padding-right: 0px;
+    height: 30px;
+}
+
+.conteiner-moderate {
+    margin-bottom: 1em;
+    padding: 1em;
+    border: 1px solid;
+    border-color: rgba(214, 214, 214, 0.79);
+    border-radius: 10px;
+    background-color: #e6e6e6;
+    -webkit-box-shadow: 0px 0px 7px -1px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 7px -1px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 7px -1px rgba(0, 0, 0, 0.75);
+}
+
+.span-moderate {
+    margin-right: 6em;
+    color: black !important;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.login-margin {
+    margin-top: 5vh;
+    margin-left: auto;
+    margin-right: auto;
+}
+/*
+.capitalize
+{
+    text-transform: capitalize;
+}*/
+
+button {
+    font-family: sans-serif;
+}
+
+.navbar-custom-menu {
+    float: right !important;
+}
+
+@media (min-width: 768px) {
+    .navbar-nav {
+        float: left;
+        margin: 0;
+    }
+}
+
+.navbar-nav {
+    margin: 7.5px -15px;
+}
+
+.nav {
+    padding-left: 0 !important;
+    margin-bottom: 0 !important;
+    list-style: none !important;
+}
+
+.generic {
+    margin-top: 0.5em;
+}
+
+.generic a {
+    color: black;
+    font-size: 18px;
+}
+
+.margin-sale {
+    margin-bottom: initial;
+}
+
+.margin-dis {
+    margin-left: auto;
+    display: -webkit-box;
+}
+
+.name-user {
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: medium;
+    width: 50%;
+}
+
+.code-sale {
+    width: 50%;
+    margin-bottom: auto;
+    margin-left: 30%;
+    margin-top: 2px;
+}
+
+.alto {
+    height: 45px;
+    margin-left: 55%;
+}
+
+.table-p {
+    margin-left: 40%;
+}
+
+.size-td {
+    width: 30%;
+}
+
+.size-td-two {
+    width: 70%;
+}
+
+.letter-type {
+    font-family: monospace;
+    font: xx-large;
+}
+
+.letter-type-two {
+    font-family: monospace;
+    font: inherit;
+}
+
+hr.miLinea {
+    height: 10px;
+    margin-left: 0%;
+    margin-right: 50%;
+    background-color: red;
+    border: 03px;
+}
+
+.scrollbar {
+    padding: 1em;
+    border-radius: 15px;
+    border: 1px solid;
+    border-color: #4e4e4e4d;
+    height: 500px;
+    overflow-y: scroll;
+}
+
+.tableScroll p:not(:last-child) {
+    margin-bottom: 1rem;
+}
+
+/* Tamaño del scroll */
+.tableScroll::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+/* Estilos barra (thumb) de scroll */
+.tableScroll::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+
+.tableScroll::-webkit-scrollbar-thumb:active {
+    background-color: #999999;
+}
+
+.tableScroll::-webkit-scrollbar-thumb:hover {
+    background: #b3b3b3;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos track de scroll */
+.tableScroll::-webkit-scrollbar-track {
+    background: #e1e1e1;
+    border-radius: 4px;
+}
+
+.tableScroll::-webkit-scrollbar-track:hover,
+.tableScroll::-webkit-scrollbar-track:active {
+    background: #d4d4d4;
+}
+
+/*Diseno  login*/
+.login-box {
+    width: 420px;
+    height: 420px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 70px 30px;
+}
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+    top: -50px;
+    left: calc(50% - 50px);
+}
+h1 {
+    margin: 0;
+    padding: 0 0 20px;
+    text-align: center;
+    font-size: 22px;
+}
+.login-box p {
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+}
+.login-box input {
+    width: 100%;
+    margin-bottom: 20px;
+}
+.login-box input[type="text"],
+input[type="password"] {
+    border: none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    font-size: 16px;
+}
+.login-button {
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #1c8adb;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+}
+.login-button:hover {
+    cursor: pointer;
+    background: #39dc79;
+    color: #000;
+}
+
+.login-box a {
+    text-decoration: none;
+    font-size: 14px;
+    color: #fff;
+}
+.login-box a:hover {
+    color: #39dc79;
+}
+.login-log {
+}
+.Image-login {
+    width: 10px;
+    height: 20px;
+}
+  
+
+
+.search_list p:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+/* Tamaño del scroll */
+.search_list::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+ /* Estilos barra (thumb) de scroll */
+.search_list::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.search_list::-webkit-scrollbar-thumb:active {
+  background-color: #999999;
+}
+
+.search_list::-webkit-scrollbar-thumb:hover {
+  background: #b3b3b3;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+ /* Estilos track de scroll */
+.search_list::-webkit-scrollbar-track {
+  background: #e1e1e1;
+  border-radius: 4px;
+}
+
+.search_list::-webkit-scrollbar-track:hover, 
+.search_list::-webkit-scrollbar-track:active {
+  background: #d4d4d4;
+}
