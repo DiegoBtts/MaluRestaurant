@@ -2,10 +2,10 @@
 
     <a href="/" class="brand-link">
 
-        <img src="{{ asset('img/plantilla/menu-image.png') }}" alt="" class="brand-image img-circle elevation-3"
+        <img src="{{ asset('img/plantilla/LogoMalu.png') }}" alt="" class="brand-image img-circle elevation-3"
             style="opacity: .8">
 
-        <span class="brand-text font-weight-light">SynLab</span>
+        <span class="brand-text font-weight-light">Malu Restaurante</span>
 
     </a>
 
@@ -24,115 +24,61 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-                <li class="nav-item">
-                    <a href="{{ route('sell') }}" class="nav-link">
+
+             <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-cash-register"></i>
                         <p>
                             Ventas
-                            <span class="right badge badge-danger">new</span>
-                        </p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="{{ route('client') }}" class="nav-link">
-                        <i class="nav-icon fas fa-users"></i>
-                        <p>
-                            Pacientes
-                            <span class="right badge badge-danger">new</span>
-                        </p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="{{ route('appointment') }}" class="nav-link">
-                        <i class="nav-icon fas fa-calendar"></i>
-                        <p>
-                            Citas
-                            <span class="right badge badge-danger">new</span>
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('receiptsamples') }}" class="nav-link">
-                        <i class="nav-icon fas fa-file-invoice"></i>
-                        <p>
-                            Recepción de Muestras
-                            <span class="right badge badge-danger">new</span>
-                        </p>
-                    </a>
-                </li>
-
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-vial"></i>
-                        <p>
-                            Pruebas
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('testtype') }}" class="nav-link">
-                                <i class="nav-icon fas fa-vials"></i>
-                                <p>Pruebas Clinicas</p>
+                            <a href="{{ route('sell') }}" class="nav-link">
+                                <i class="nav-icon fas fa-cash-register"></i>
+                                <p>Ventas</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('samplestype') }}" class="nav-link">
-                                <i class="nav-icon fas fa-syringe"></i>
-                                <p>Muestras clinicas</p>
+                            <a href="{{ route('saleshistory') }}" class="nav-link">
+                                <i class="nav-icon fas fa-dollar-sign"></i>
+                                <p>Corte fin día</p>
                             </a>
                         </li>
                     </ul>
                 </li>
-
-                @if(Auth::user()->role=="admin")
+                
                 <li class="nav-item">
-                    <a href="{{route('groups')}}" class="nav-link">
-                        <i class="nav-icon fas fa-notes-medical"></i>
+                    <a href="{{ route('product')}}" class="nav-link">
+                        <i class="nav-icon fas fa-concierge-bell"></i>
                         <p>
-                            Examenes
-                            <span class="right badge badge-danger">new</span>
-                        </p>
-                    </a>
-                </li>
-                @endif
-
-                <li class="nav-item">
-                    <a href="{{ route('saleshistory') }}" class="nav-link">
-                        <i class="nav-icon fas fa-folder"></i>
-                        <p>
-                            Historial de Ventas
+                            Menú
                             <span class="right badge badge-danger">new</span>
                         </p>
                     </a>
                 </li>
 
-                <li class="nav-item has-treeview">
-
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-boxes"></i>
+                <li class="nav-item">
+                    <a href="{{ route('product')}}" class="nav-link">
+                        <i class="nav-icon fas fa-utensils"></i>
                         <p>
-                            Inventarios
-                            <i class="right fas fa-angle-left"></i>
+                            Comandas
+                            <span class="right badge badge-danger">new</span>
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('product') }}" class="nav-link">
-                                <i class="nav-icon fas fa-box-open"></i>
-                                <p>Productos</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('category') }}" class="nav-link">
-                                <i class="nav-icon fas fa-pills"></i>
-                                <p>Categorias</p>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('product')}}" class="nav-link">
+                        <i class="nav-icon fas fa-file-invoice-dollar"></i>
+                        <p>
+                            Facturación
+                            <span class="right badge badge-danger">new</span>
+                        </p>
+                    </a>
+                </li>
+
 
                 @if(Auth::user()->role=="admin")
 
