@@ -120,6 +120,33 @@ Route::group(['middleware' => 'auth' ], function()
         'as'=> 'saleshistory.see'
     ]);
 
+    /* OrderFood */
+    
+    Route::get('/orderfood', [
+        'uses' => 'Panel\OrderFoodController@index',
+        'as'=> 'orderfood'
+    ]);
+    
+    Route::get('/orderfood/add', [
+        'uses' => 'Panel\OrderFoodController@add',
+        'as'=> 'orderfood.add'
+    ]);
+
+    Route::post('/orderfood/save/{orderfood?}', [
+        'uses' => 'Panel\OrderFoodController@save',
+        'as'=> 'orderfood.save'
+    ]);
+
+    Route::get('/orderfood/{id}/edit', [
+        'uses' => 'Panel\OrderFoodController@edit',
+        'as'=> 'orderfood.edit'
+    ]);
+
+    Route::get('/orderfood/{id}/delete', [
+        'uses' => 'Panel\OrderFoodController@delete',
+        'as'=> 'orderfood.delete'
+    ]);
+
     
 
     // Esta ruta nos servirá para cerrar sesión.

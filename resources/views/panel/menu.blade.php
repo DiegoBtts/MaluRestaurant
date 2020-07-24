@@ -25,7 +25,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
 
-             <li class="nav-item has-treeview">
+                <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-cash-register"></i>
                         <p>
@@ -48,7 +48,7 @@
                         </li>
                     </ul>
                 </li>
-                
+
                 <li class="nav-item">
                     <a href="{{ route('product')}}" class="nav-link">
                         <i class="nav-icon fas fa-concierge-bell"></i>
@@ -60,7 +60,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('product')}}" class="nav-link">
+                    <a href="{{ route('orderfood')}}" class="nav-link">
                         <i class="nav-icon fas fa-utensils"></i>
                         <p>
                             Comandas

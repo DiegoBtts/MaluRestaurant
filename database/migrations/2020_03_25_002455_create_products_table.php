@@ -16,12 +16,8 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string("name",50);
-            $table->decimal("purchase_price");
-            $table->integer("stock");
-            $table->integer("stock_min");
-            $table->date("expiration_date");
-            $table->BigInteger("categoria_id")->unsigned();
-            $table->foreign("categoria_id")->references("id")->on("category")->onDelete("cascade");
+            $table->decimal("price");
+           
             $table->timestamps();
         });
     }

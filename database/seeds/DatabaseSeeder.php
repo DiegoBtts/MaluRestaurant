@@ -26,21 +26,7 @@ class DatabaseSeeder extends Seeder
               'photo'=>'',
                'password' => bcrypt('demo'),
           ]);
-        DB::table('samplestype')->insert([
-            'name' => 'Heces',
-            'description'=>'Muestra de heces',
-           
-        ]);
-        DB::table('samplestype')->insert([
-            'name' => 'Orina',
-            'description'=>'Muestra de orina',
-           
-        ]);
-        DB::table('samplestype')->insert([
-            'name' => 'Sangre',
-            'description'=>'Muestra de sangre',
-           
-        ]);
+     
         
 
         $this->command->info('Demo user Created -> demo@demo.com / demo');

@@ -12,7 +12,7 @@
 
                 <div class="col-sm-6">
 
-                    <h1>Menu</h1>
+                    <h1>Comandas</h1>
 
                 </div>
 
@@ -20,8 +20,8 @@
 
                     <ol class="breadcrumb float-sm-right">
 
-                        <a href="{{route('product.add')}}" class="btn btn-block btn-primary"><i
-                                class="fa fa-fw fa-plus"></i>Agregar Producto</a>
+                        <a href="{{route('orderfood.add')}}" class="btn btn-block btn-primary"><i
+                                class="fa fa-fw fa-plus"></i>Agregar Comanda</a>
 
                     </ol>
 
@@ -45,8 +45,9 @@
 
                         <tr>
                             <th style="width: 10px">#</th>
-                            <th>Nombre</th>
-                            <th>Costo</th>
+                            <th>Tipo de orden</th>
+                            <th>Fecha</th>
+                            <th>Hora</th>
 
                             <th>Acciones</th>
                         </tr>
@@ -58,13 +59,14 @@
                         @foreach($items as $key => $value)
                         <tr>
                             <td>{{$key+1}}</td>
-                            <td>{{$value->name}}</td>
-                            <td>${{$value->price}}</td>
+                            <td>{{$value->ordertype}}</td>
+                            <td>{{$value->date}}</td>
+                            <td>{{$value->hour}}</td>
                             <td>
                                 <div class="btn-group">
-                                    <a href="{{route('product.edit',$value->id)}}" class="btn btn-warning"><i
+                                    <a href="{{route('orderfood.edit',$value->id)}}" class="btn btn-warning"><i
                                             class="fa fa-eye"></i></a>
-                                    <button id="delete" ProductId="{{$value->id}}" class="btn btn-danger"><i
+                                    <button id="delete" orderfoodId="{{$value->id}}" class="btn btn-danger"><i
                                             class="fa fa-times"></i></button>
                                 </div>
                             </td>
@@ -82,8 +84,6 @@
     </section>
 
 </div>
-
-
 
 
 <script src="{{ asset('js/product.js')}}"></script>
