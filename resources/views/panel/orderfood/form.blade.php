@@ -190,10 +190,10 @@
                                 <tbody>
                                     @foreach($products as $key => $value)
                                     <tr>
-                                        <td><input type="checkbox" name="products[]" value="{{$value->name}}"></td>
+                                        <td><input type="checkbox" name="products[]" value="{{$value->id}}"></td>
                                         <td>{{$key+1}}</td>
                                         <td>{{$value->name}}</td>
-                                        <td><input type="number" name="cantidad" id="{{$key+1}}"></td>
+                                        <td><input type="number" name="quantity[]" id="{{$key+1}}"></td>
 
                                     </tr>
                                     @endforeach

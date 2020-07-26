@@ -12,19 +12,19 @@ class OrderFoodModel extends Model
         'id',
         'date',
         'hour',
-    	//'ordertype',
+    	'ordertype',
     	'address',
-        'phone'
-      //  'tablenumber'
-  
+        'phone',
+        'tablenumber',
+        'status'
     ];
+    
     protected $cast=[
         'productslist'=>'array'
     ];
         
     
-    //public function Products()
-    //{
-      //  return $this->hasMany('App\models\ProductsModel','ProductId');
-    //}
+    public function products() {
+    return $this->belongsToMany('App\models\ProductsModel');
+}
 }

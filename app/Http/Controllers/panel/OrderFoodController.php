@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Panel;
 use Illuminate\Http\Request;
 use App\models\OrderFoodModel;
 use App\models\ProductsModel;
+use App\models\ProductsOrderfoodModel;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 
@@ -38,7 +39,8 @@ class OrderFoodController extends Controller
 
     public function save(Request $request, OrderFoodModel $orderfood) 
     {
- 
+        $productsList= $request->input('products[]');
+        $quantityList= $request->input('quantity[]');
         
         $date = $request->input('date')!=null?$request->input('date'):date('Y-m-d');
         $hour = $request->input('hour')!=null?$request->input('hour'):date('H:i:s');
@@ -48,10 +50,22 @@ class OrderFoodController extends Controller
         $orderfood->address = $request->input('address');
         $orderfood->phone = $request->input('phone');
         $orderfood->tablenumber = $request->input('tablenumber');
-       // $orderfood->productslist = $request('products');
-        
+        $orderfood->status = 0;
         $orderfood->save();
+        
+        $productsorderfood = new ProductsOrderfoodmodel;
+        $orders = OrderFoodModel::all();
+        
+        /*for($i=0; $i< count($productsList); $i++)
+        {
+            $productsorderfood->quantity = $quantityList[$i];
+            $productsorderfood->products_id = $productsList[$i];
+            $productsorderfood->orderfood_id = $orders->last();
+            $productsorderfood->save();
+        }
+        */
+        return $productsList;
         session()->flash('messages', 'success|Comanda registrada correctamente.' );
-        return redirect()->route('orderfood');
+       // return redirect()->route('orderfood');
     }
 }

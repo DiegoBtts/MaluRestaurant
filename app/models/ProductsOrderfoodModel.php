@@ -4,13 +4,13 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProductsModel extends Model
+class ProductsOrderfoodModel extends Model
 {
-    protected $table = "products";
+    protected $table = "productsorderfood";
 
     protected $fillable = [
-    	'name',
-    	'price'
+    	'quantity',
+    	
     	
     ];
     

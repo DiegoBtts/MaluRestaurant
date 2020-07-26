@@ -21,9 +21,7 @@ class CreateOrdeFoodTable extends Migration
             $table->string("address");
             $table->string("phone");
             $table->string("tablenumber");
-            //$table->json("productslist");
-           // $table->bigInteger("product_id")->unsigned();
-          //  $table->foreign("product_id")->references("id")->on("products")->onDelete('cascade');
+            $table->integer("status");
             $table->timestamps();
             
         });

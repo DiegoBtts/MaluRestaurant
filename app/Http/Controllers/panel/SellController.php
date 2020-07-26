@@ -4,34 +4,32 @@ namespace App\Http\Controllers\Panel;
 
 use Illuminate\Http\Request;
 use App\models\SellModel;
-use App\models\AppointmentModel;
+use App\models\OrderFoodModel;
 use App\Http\Controllers\Controller;
-use App\models\GroupsModel;
-use App\models\TestTypeModel;
 use App\models\SaleModel;
 
 class SellController extends Controller
 {
     public function index()
 	{     
-		return view('panel.sell.index')->with(['appointment' => new AppointmentModel()]);
+		return view('panel.sell.index')->with(['orderfood' => new orderfoodModel()]);
 	}
 
     public function save(Request $request) 
     {
         $sale = new SaleModel();
-        $list_appointment = json_decode($request->input("listAppointment"),true);
+        $list_orderfood = json_decode($request->input("listOrderFood"),true);
 
-        foreach ($list_appointment as $key => $value) 
+        foreach ($list_orderfood as $key => $value) 
         {
-            $appointment = AppointmentModel::find($value["id"]);
-            $appointment->status = 1;
-            $appointment->save();
+            $orderfood = OrderFoodModel::find($value["id"]);
+            $orderfood->status = 1;
+            $orderfood->save();
         }
 
         $sale->total = $request->input("total");
         $sale->payment_method = $request->input("payment_method");
-        $sale->list_appointment = $request->input("listAppointment");
+        $sale->list_orderfood = $request->input("listOrderFood");
         $sale->save();
         return response()->json($sale->id);
     }
