@@ -21,3 +21,22 @@ function checkAll(bx) {
     }
 }
 
+$(".tableOrderFood").dataTable();
+
+$(".tableOrderFood tbody").on("click", "button#delete", function () {
+    var OrderFoodId = $(this).attr("OrderFoodId");
+    swal.fire({
+        title: "¿Esta seguro de borrar la orden?",
+        text: "¡si no lo esta puede cancelar!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        cancelButtonText: "Cancelar",
+        confirmButtonText: "Si, Eliminar Comanda",
+    }).then((result) => {
+        if (result.value) {
+            window.location = "/orderfood/" + OrderFoodId + "/delete";
+        }
+    });
+});

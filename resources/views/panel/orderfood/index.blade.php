@@ -39,7 +39,7 @@
 
             <div class="card-body">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
-                <table class="table table-bordered table-hover tableProduct">
+                <table class="table table-bordered table-hover tableOrderFood">
 
                     <thead>
 
@@ -86,6 +86,6 @@
 </div>
 
 
-<script src="{{ asset('js/product.js')}}"></script>
+<script src="{{ asset('js/orderfood.js')}}"></script>
 
 @stop

@@ -22,6 +22,9 @@ class CreateOrdeFoodTable extends Migration
             $table->string("phone");
             $table->string("tablenumber");
             $table->integer("status");
+            $table->json("products");
+            $table->json("quantity");
+            
             $table->timestamps();
             
         });

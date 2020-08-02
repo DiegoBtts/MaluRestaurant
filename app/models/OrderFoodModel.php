@@ -20,11 +20,13 @@ class OrderFoodModel extends Model
     ];
     
     protected $cast=[
-        'productslist'=>'array'
+        'products'=>'array',
+        'quantity'=>'array'
     ];
+
+    
         
     
-    public function products() {
-    return $this->belongsToMany('App\models\ProductsModel');
-}
+  
+
 }
