@@ -14,7 +14,7 @@
 
                 <div class="col-sm-6">
 
-                    <h1>{{ $orderfood->id? 'Editar':'Nuevo' }} Comanda</h1>
+                    <h1 id="titulo">{{ $orderfood->id? 'Editar':'Nuevo' }} Comanda</h1>
 
                 </div>
 
@@ -52,6 +52,7 @@
                             <div class="input-group">
 
                                 <div class="input-group-btn" data-toggle="buttons" id="Options">
+                                    @if($orderfood->ordertype == "restaurante")
                                     <label for="">Tipo de comanda</label> <br>
                                     <label class="btn btn-primary active">
                                         <i class="fas fa-utensils fa-5x"></i>
@@ -67,7 +68,23 @@
                                             value="Domicilio">
                                         Domicilio
                                     </label>
-
+                                    @else
+                                    <label for="">Tipo de comanda</label> <br>
+                                    <label class="btn btn-primary active">
+                                        <i class="fas fa-utensils fa-5x"></i>
+                                        <br>
+                                        <input type="radio" name="ordertype" id="restaurant" autocomplete="off"
+                                            value="restaurante ">
+                                        Restaurante
+                                    </label>
+                                    <label class="btn btn-primary">
+                                        <i class="fas fa-map-marker-alt fa-5x"></i>
+                                        <br>
+                                        <input type="radio" name="ordertype" id="order" autocomplete="off"
+                                            value="Domicilio" checked>
+                                        Domicilio
+                                    </label>
+                                    @endif
                                 </div>
 
                             </div>
@@ -83,13 +100,26 @@
 
                                 <div class="input-group-btn mx-auto" data-toggle="buttons" id="tablenumber">
                                     <label for="">Numero de mesas</label> <br>
-                                    @for($i = 1; $i <= 8; $i++) <label class="btn btn-primary active">
-                                        <img src="{{ asset('img/plantilla/mesa.png') }}" alt="" srcset="">
-                                        <br>
-                                        <input type="radio" name="tablenumber" id="option{{ $i }}" autocomplete="off"
-                                            value="{{ $i }}">
-                                        #{{ $i }}
+                                    @for($i = 1; $i <= 8; $i++) @if($orderfood->tablenumber == $i)<label
+                                            class="btn btn-primary active">
+
+                                            <img src="{{ asset('img/plantilla/mesa.png') }}" alt="" srcset="">
+                                            <br>
+                                            <input type="radio" name="tablenumber" id="option{{ $i }}"
+                                                autocomplete="off" value="{{ $i }}" checked>
+                                            #{{ $i }}
                                         </label>
+                                        @else
+                                        <label class="btn btn-primary active">
+
+                                            <img src="{{ asset('img/plantilla/mesa.png') }}" alt="" srcset="">
+                                            <br>
+                                            <input type="radio" name="tablenumber" id="option{{ $i }}"
+                                                autocomplete="off" value="{{ $i }}">
+                                            #{{ $i }}
+                                        </label>
+                                        @endif
+
                                         @endfor
 
                                 </div>
@@ -188,12 +218,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+
                                     @foreach($products as $key => $value)
                                     <tr>
                                         <td><input type="checkbox" name="products[]" value="{{$value->id}}"></td>
                                         <td>{{$key+1}}</td>
                                         <td>{{$value->name}}</td>
-                                        <td><input type="number" name="quantity[]" id="{{$key+1}}"></td>
+                                        <td><input type="number" name="quantity[]" id="{{$value->id}}"></td>
 
                                     </tr>
                                     @endforeach
@@ -236,7 +267,38 @@
     </section>
 
 </div>
+<script>
+const orderfood = @json($orderfood);
+const products = @json($products);
+var regex = /^[0-9]$/;
+let arrayidproducts = [];
+let arrayidquantity = [];
 
+for (var i = 0; i < orderfood.products.length; i++) {
+
+    if (regex.test(orderfood.products[i])) {
+        console.log("entro al if");
+        arrayidproducts.push(orderfood.products[i]);
+        arrayidquantity.push(orderfood.quantity[i]);
+    }
+
+}
+
+var cbs = document.getElementsByTagName("input");
+for (var i = 0; i < cbs.length; i++) {
+    if (cbs[i].type == "checkbox") {
+        console.log("es un checkbox");
+        for (var j = 0; j < arrayidproducts.length; j++) {
+            if (cbs[i].value == arrayidproducts[j]) {
+                console.log("es un producto seleccionado");
+                cbs[i].checked = true;
+                document.getElementById(arrayidproducts[j]).value = arrayidquantity[j];
+            }
+
+        }
+    }
+}
+</script>
 
 
 @stop

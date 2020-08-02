@@ -25,8 +25,8 @@ class OrderFoodController extends Controller
 
     public function edit($id)
     {
-        $orderfood = orderfoodModel::find($id);
-        return view('panel.orderfood.form')->with(['orderfood' => OrderFoodModel::find($id)]);
+        $products = ProductsModel::all();
+        return view('panel.orderfood.form')->with(['orderfood' => OrderFoodModel::find($id),'products' =>$products]);
     }
 
 

@@ -2,6 +2,7 @@
   $(document).ready(function () {
      $(".mdb-select").materialSelect();
  });
+
 $(document).ready(function () {
     $("#example").DataTable({
         aLengthMenu: [
@@ -40,3 +41,4 @@ $(".tableOrderFood tbody").on("click", "button#delete", function () {
         }
     });
 });
+
