@@ -48,6 +48,7 @@
                             <th>Tipo de orden</th>
                             <th>Fecha</th>
                             <th>Hora</th>
+                            <th>Estatus</th>
 
                             <th>Acciones</th>
                         </tr>
@@ -62,6 +63,11 @@
                             <td>{{$value->ordertype}}</td>
                             <td>{{$value->date}}</td>
                             <td>{{$value->hour}}</td>
+                            @if($value->status == 0)
+                            <td>Pendiente</td>
+                            @else
+                            <td>Finalizada</td>
+                            @endif
                             <td>
                                 <div class="btn-group">
                                     <a href="{{route('orderfood.edit',$value->id)}}" class="btn btn-warning"><i

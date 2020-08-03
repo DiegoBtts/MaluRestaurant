@@ -52,23 +52,7 @@
                             <div class="input-group">
 
                                 <div class="input-group-btn" data-toggle="buttons" id="Options">
-                                    @if($orderfood->ordertype == "restaurante")
-                                    <label for="">Tipo de comanda</label> <br>
-                                    <label class="btn btn-primary active">
-                                        <i class="fas fa-utensils fa-5x"></i>
-                                        <br>
-                                        <input type="radio" name="ordertype" id="restaurant" autocomplete="off"
-                                            value="restaurante " checked>
-                                        Restaurante
-                                    </label>
-                                    <label class="btn btn-primary">
-                                        <i class="fas fa-map-marker-alt fa-5x"></i>
-                                        <br>
-                                        <input type="radio" name="ordertype" id="order" autocomplete="off"
-                                            value="Domicilio">
-                                        Domicilio
-                                    </label>
-                                    @else
+
                                     <label for="">Tipo de comanda</label> <br>
                                     <label class="btn btn-primary active">
                                         <i class="fas fa-utensils fa-5x"></i>
@@ -77,14 +61,17 @@
                                             value="restaurante ">
                                         Restaurante
                                     </label>
+
                                     <label class="btn btn-primary">
                                         <i class="fas fa-map-marker-alt fa-5x"></i>
                                         <br>
                                         <input type="radio" name="ordertype" id="order" autocomplete="off"
-                                            value="Domicilio" checked>
+                                            value="Domicilio">
                                         Domicilio
                                     </label>
-                                    @endif
+
+
+
                                 </div>
 
                             </div>
@@ -221,7 +208,9 @@
 
                                     @foreach($products as $key => $value)
                                     <tr>
-                                        <td><input type="checkbox" name="products[]" value="{{$value->id}}"></td>
+                                        <td><input type="checkbox" name="products[]" value="{{$value->id}}"
+                                                onclick="check({{$value->id}})">
+                                        </td>
                                         <td>{{$key+1}}</td>
                                         <td>{{$value->name}}</td>
                                         <td><input type="number" name="quantity[]" id="{{$value->id}}"></td>
@@ -292,11 +281,18 @@ for (var i = 0; i < cbs.length; i++) {
             if (cbs[i].value == arrayidproducts[j]) {
                 console.log("es un producto seleccionado");
                 cbs[i].checked = true;
+                document.getElementById(arrayidproducts[j]).required = true;
                 document.getElementById(arrayidproducts[j]).value = arrayidquantity[j];
             }
 
         }
     }
+}
+if (orderfood.ordertype == document.getElementById("order").value) {
+    document.getElementById("order").checked = true
+
+} else {
+    document.getElementById("restaurant").checked = true;
 }
 </script>
 

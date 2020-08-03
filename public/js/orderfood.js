@@ -42,3 +42,10 @@ $(".tableOrderFood tbody").on("click", "button#delete", function () {
     });
 });
 
+
+function check(value){
+    
+document.getElementById(value).required =true;
+
+}
+
