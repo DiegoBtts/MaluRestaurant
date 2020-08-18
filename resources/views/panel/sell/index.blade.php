@@ -182,7 +182,7 @@
 
           </div>
 
-          <input type="hidden" name="appointments" id="appointments">
+          <input type="hidden" name="orderfoods" id="orderfoods">
 
         </div>
 
@@ -320,8 +320,8 @@
 
             <ul class="list-group find_code" id="myList">
 
-              @foreach(\Helper::getAppointment(0) as $value)
-                <li class="list-group-item" code ="{{$value->appointment_code}}" >{{$value->appointment_code}}&nbsp;{{ \Helper::getClient($value->client_id)->name}}</li>
+              @foreach(\Helper::getOrderFood(0) as $value)
+                <li class="list-group-item" code ="{{$value->id}}" >{{$value->id}}</li>
               @endforeach
               
             </ul> 

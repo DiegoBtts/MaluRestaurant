@@ -2,13 +2,8 @@
 
 namespace App\Helpers;
 
-use App\models\SamplesTypeModel;
-use App\models\CategoryModel;
-use App\models\TestTypeModel;
 use App\models\UserModel;
-use App\models\GroupsModel;
-use App\models\ClientModel;
-use App\models\AppointmentModel;
+use App\models\OrderFoodModel;
 use App\models\SaleModel;
 use App\models\ProductsModel;
 use Illuminate\Support\Facades\DB;
@@ -16,32 +11,24 @@ use Illuminate\Support\Facades\DB;
 class helper
 {
 	//consult Methods
-	public static function generateAppointmentArray($id)
+	public static function generateOrderFoodArray($id)
 	{
 		$res = [];
 
-		$appointment = AppointmentModel::find($id);
-		array_push($res, $appointment);
-		$group = GroupsModel::find($appointment->exam_id);
-		array_push($res, $group);
-		$client =ClientModel::find($appointment->client_id);
-		array_push($res, $client);
-        $testtype =TestTypeModel::find($group->typeTest_id);
-        array_push($res, $testtype);
-        $samplestype =SamplesTypeModel::find($testtype->sample_id);
-        array_push($res, $samplestype);
+		$orderfood = OrderFoodModel::find($id);
+		array_push($res, $orderfood);
         return $res;
 	}
 
-	public static function getAppointment($id)
+	public static function getOrderFood($id)
 	{
 		if ($id!=0)
 		{
-			return AppointmentModel::find($id);
+			return OrderFoodModel::find($id);
 		}
 		else
 		{
-			return AppointmentModel::all();
+			return OrderFoodModel::all();
 		}
 	}
 
@@ -57,65 +44,8 @@ class helper
 		}
 	}
 
-	public static function getSample($id)
-	{
-		if ($id!=0)
-		{
-			return SamplesTypeModel::find($id);
-		}
-		else
-		{
-			return SamplesTypeModel::all();
-		}
-	}
+	
 
-	public static function getClient($id)
-	{
-		if ($id!=0)
-		{
-			return ClientModel::find($id);
-		}
-		else
-		{
-			return ClientModel::all();
-		}
-	}
-
-	public static function getExam($id)
-	{
-		if ($id!=0)
-		{
-			return GroupsModel::find($id);
-		}
-		else
-		{
-			return GroupsModel::all();
-		}
-	}
-
-	public static function getCategories($id)
-	{
-		if ($id!=0)
-		{
-			return CategoryModel::find($id);
-		}
-		else
-		{
-			return CategoryModel::all();
-		}
-	}
-
-	public static function getTest($id)
-	{
-		if ($id!=0)
-		{
-			return TestTypeModel::find($id);
-		}
-		else
-		{
-			return TestTypeModel::all();
-		}
-	}
 
 	public static function getUsers($id)
 	{
