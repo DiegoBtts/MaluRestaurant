@@ -12,13 +12,13 @@
 
             <div class="row mb-2">
 
-                <div class="col-sm-6">
+                <div class="col-sm-3">
 
                     <h1 id="titulo">{{ $orderfood->id? 'Editar':'Nuevo' }} Comanda</h1>
 
                 </div>
 
-                <div class="col-sm-6">
+                <div class="col-sm-9">
 
                     <ol class="breadcrumb float-sm-right">
 
@@ -54,19 +54,19 @@
                                 <div class="input-group-btn" data-toggle="buttons" id="Options">
 
                                     <label for="">Tipo de comanda</label> <br>
-                                    <label class="btn btn-primary active">
+                                    <label class="btn btn-primary active" onclick="CheckValuesOrder('Restaurante')">
                                         <i class="fas fa-utensils fa-5x"></i>
                                         <br>
                                         <input type="radio" name="ordertype" id="restaurant" autocomplete="off"
-                                            value="restaurante ">
+                                            value="restaurante" onclick="CheckValuesOrder('Restaurante')">
                                         Restaurante
                                     </label>
 
-                                    <label class="btn btn-primary">
+                                    <label class="btn btn-primary" onclick="CheckValuesOrder('Domicilio')">
                                         <i class="fas fa-map-marker-alt fa-5x"></i>
                                         <br>
                                         <input type="radio" name="ordertype" id="order" autocomplete="off"
-                                            value="Domicilio">
+                                            value="Domicilio" onclick="CheckValuesOrder('Domicilio')">
                                         Domicilio
                                     </label>
 
@@ -123,11 +123,11 @@
                                 <div class="input-group-prepend">
 
                                     <span class="input-group-text" onclick="getFocus('date')"><i
-                                            class="fas fa-map-marker-alt"></i></span>
+                                            class="fas fa-calendar-day"></i></span>
 
                                 </div>
 
-                                <input type="date" step="any" id="date" name="date" placeholder="Fecha"
+                                <input step="any" id="date" name="date" placeholder="Fecha"
                                     class="form-control form-control-lg" required value="{{$orderfood->date}}">
 
                             </div>
@@ -141,7 +141,7 @@
                                 <div class="input-group-prepend">
 
                                     <span class="input-group-text" onclick="getFocus('hour')"><i
-                                            class="fas fa-map-marker-alt"></i></span>
+                                            class="fas fa-clock"></i></span>
 
                                 </div>
 
@@ -151,7 +151,7 @@
                             </div>
 
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6" id="address">
                             <label class="label-style" for="address">Domicilio</label>
 
                             <div class="input-group mb-3">
@@ -169,7 +169,7 @@
                             </div>
 
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6" id="phone">
                             <label class="label-style" for="phone">Telefono</label>
 
                             <div class="input-group mb-3">

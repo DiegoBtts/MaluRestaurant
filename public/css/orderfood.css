@@ -1,16 +1,15 @@
-
-table{
-    width:100%;
+table {
+    width: 100%;
 }
-#example_filter{
-    float:right;
+#example_filter {
+    float: right;
 }
-#example_paginate{
-    float:right;
+#example_paginate {
+    float: right;
 }
 label {
     display: inline-flex;
-    margin-bottom: .5rem;
-    margin-top: .5rem;
-   
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
 }
+

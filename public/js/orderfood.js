@@ -1,7 +1,18 @@
-
-  $(document).ready(function () {
-     $(".mdb-select").materialSelect();
- });
+$(document).ready(function () {
+    // $(".mdb-select").materialSelect();
+    $("#tablenumber").show("fast");
+    $("#address").hide("fast");
+    $("#phone").hide("fast");
+    $("#restaurant").prop("checked", true);
+    var date = new Date();
+    var hora =
+        date.getHours() + ":" + date.getMinutes();
+    $("#hour").val(hora);
+    var fecha =
+        date.getMonth() + 1 + "-" + date.getDate() + "-" + date.getFullYear();
+    $("#date").val(fecha);
+    $("#date").prop("disabled", true);
+});
 
 $(document).ready(function () {
     $("#example").DataTable({
@@ -42,10 +53,21 @@ $(".tableOrderFood tbody").on("click", "button#delete", function () {
     });
 });
 
-
-function check(value){
-    
-document.getElementById(value).required =true;
-
+function check(value) {
+    document.getElementById(value).required = true;
 }
 
+function CheckValuesOrder(value) {
+    console.log(value);
+    if (value == "Domicilio") {
+        $("#tablenumber").hide("fast");
+        $("#address").show("fast");
+        $("#phone").show("fast");
+    } else if (value == "Restaurante") {
+        $("#tablenumber").show("fast");
+        $("#address").hide("fast");
+        $("#phone").hide("fast");
+    }
+}
+
+function CheckValuesRes() {}
