@@ -5,8 +5,7 @@ $(document).ready(function () {
     $("#phone").hide("fast");
     $("#restaurant").prop("checked", true);
     var date = new Date();
-    var hora =
-        date.getHours() + ":" + date.getMinutes();
+    var hora = date.getHours() + ":" + date.getMinutes();
     $("#hour").val(hora);
     var fecha =
         date.getMonth() + 1 + "-" + date.getDate() + "-" + date.getFullYear();
