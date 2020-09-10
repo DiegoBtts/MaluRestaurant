@@ -1,16 +1,8 @@
 $(document).ready(function () {
     // $(".mdb-select").materialSelect();
-    $("#tablenumber").show("fast");
-    $("#address").hide("fast");
-    $("#phone").hide("fast");
+    CheckValuesOrder("Restaurante");
+    ActualDate();
     $("#restaurant").prop("checked", true);
-    var date = new Date();
-    var hora = date.getHours() + ":" + date.getMinutes();
-    $("#hour").val(hora);
-    var fecha =
-        date.getMonth() + 1 + "-" + date.getDate() + "-" + date.getFullYear();
-    $("#date").val(fecha);
-    $("#date").prop("disabled", true);
 });
 
 $(document).ready(function () {
@@ -32,7 +24,7 @@ function checkAll(bx) {
     }
 }
 
-$(".tableOrderFood").dataTable();
+
 
 $(".tableOrderFood tbody").on("click", "button#delete", function () {
     var OrderFoodId = $(this).attr("OrderFoodId");
@@ -59,14 +51,70 @@ function check(value) {
 function CheckValuesOrder(value) {
     console.log(value);
     if (value == "Domicilio") {
+        console.log("entro a domicilio");
         $("#tablenumber").hide("fast");
-        $("#address").show("fast");
-        $("#phone").show("fast");
+        $("#daddress").show("fast");
+        $("#dphone").show("fast");
+        $("#phone").attr("required", true);
+        $("#address").attr("required", true);
+        $(".options").attr("required", false);
     } else if (value == "Restaurante") {
         $("#tablenumber").show("fast");
-        $("#address").hide("fast");
-        $("#phone").hide("fast");
+        $("#daddress").hide("fast");
+        $("#dphone").hide("fast");
+        $("#phone").attr("required", false);
+        $("#address").attr("required", false);
+        $(".options").attr("required", true);
     }
 }
 
 function CheckValuesRes() {}
+
+function ActualDate() {
+    var date = new Date();
+    var month = date.getMonth();
+    var datetime = date.getDate();
+    var year = date.getFullYear();
+    if (month != 12) {
+        if (month < 9) {
+            month = "0" + (month + 1);
+        } else {
+            month = month + 1;
+        }
+    }
+
+    if (datetime < 10) {
+        datetime = "0" + datetime;
+    }
+    var fecha = year + "-" + month + "-" + datetime;
+    $("#date").val(fecha);
+    $("#date").prop("disabled", true);
+
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? "pm" : "am";
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    var strTime = 0 + hours + ":" + minutes;
+    $("#hour").val(strTime);
+    $("#hour").prop("disabled", true);
+}
+
+function addcheck(value) {
+    var cbox = "cbox" + value;
+    $("#" + cbox).prop("checked", true);
+}
+function validateCbox(value) {
+    var cbox = "cbox" + value;
+    if ($("#" + value).val() == "") {
+        $("#" + cbox).prop("checked", false);
+    }
+}
+
+function btnTables(value, id) {
+    $("#" + value).prop("checked", true);
+    $("#radonly" + id).css("background-color", "red");
+    $("#some-content").hover(function () {
+        $("#radonly" + id).css("background-color", "blue");
+    });
+}
+

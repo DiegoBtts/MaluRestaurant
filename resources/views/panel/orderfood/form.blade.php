@@ -4,6 +4,7 @@
 
 <link rel="stylesheet" href="{{ asset('css/orderfood.css')}}">
 <script src="{{ asset('js/orderfood.js')}}"></script>
+
 <div class="content-wrapper">
 
     <section class="content-header">
@@ -88,20 +89,25 @@
                                 <div class="input-group-btn mx-auto" data-toggle="buttons" id="tablenumber">
                                     <label for="">Numero de mesas</label> <br>
                                     @for($i = 1; $i <= 8; $i++) @if($orderfood->tablenumber == $i)<label
-                                            class="btn btn-primary active">
+                                            class="btn active radondy" onclick="btnTables(option{{ $i }})">
 
-                                            <img src="{{ asset('img/plantilla/mesa.png') }}" alt="" srcset="">
+                                            <img src="{{ asset('img/plantilla/mesa.png') }}" alt=""
+                                                onclick="btnTables('option{{ $i }}',{{ $i }})" srcset="">
                                             <br>
-                                            <input type="radio" name="tablenumber" id="option{{ $i }}"
-                                                autocomplete="off" value="{{ $i }}" checked>
+                                            <input type="radio" name="tablenumber" id="option{{ $i }}" class="options"
+                                                onclick="btnTables('option{{ $i }}',{{ $i }})" autocomplete="off"
+                                                value="{{ $i }}">
                                             #{{ $i }}
                                         </label>
                                         @else
-                                        <label class="btn btn-primary active">
+                                        <label class="btn active radondy" onclick="btnTables('option{{ $i }}',{{ $i }})"
+                                            id="radonly{{ $i }}">
 
-                                            <img src="{{ asset('img/plantilla/mesa.png') }}" alt="" srcset="">
+                                            <img src="{{ asset('img/plantilla/mesa.png') }}" alt=""
+                                                onclick="btnTables('option{{ $i }}',{{ $i }})" srcset="">
                                             <br>
                                             <input type="radio" name="tablenumber" id="option{{ $i }}"
+                                                onclick="btnTables('option{{ $i }}',{{ $i }})" class="options"
                                                 autocomplete="off" value="{{ $i }}">
                                             #{{ $i }}
                                         </label>
@@ -151,7 +157,7 @@
                             </div>
 
                         </div>
-                        <div class="col-md-6" id="address">
+                        <div class="col-md-6" id="daddress">
                             <label class="label-style" for="address">Domicilio</label>
 
                             <div class="input-group mb-3">
@@ -164,12 +170,12 @@
                                 </div>
 
                                 <input type="text" step="any" id="address" name="address" placeholder="domicilio"
-                                    class="form-control form-control-lg" required value="{{$orderfood->address}}">
+                                    class="form-control form-control-lg" value="{{$orderfood->address}}">
 
                             </div>
 
                         </div>
-                        <div class="col-md-6" id="phone">
+                        <div class="col-md-6" id="dphone">
                             <label class="label-style" for="phone">Telefono</label>
 
                             <div class="input-group mb-3">
@@ -181,8 +187,9 @@
 
                                 </div>
 
-                                <input type="tel" step="any" id="phone" name="phone" placeholder="Telefono"
-                                    class="form-control form-control-lg" required value="{{$orderfood->phone}}">
+                                <input type="number" step="any" id="phone" name="phone" placeholder="Telefono"
+                                    class="form-control form-control-lg" value="{{$orderfood->phone}}" maxlength="10"
+                                    oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
 
                             </div>
 
@@ -209,11 +216,13 @@
                                     @foreach($products as $key => $value)
                                     <tr>
                                         <td><input type="checkbox" name="products[]" value="{{$value->id}}"
-                                                onclick="check({{$value->id}})">
+                                                onclick="check({{$value->id}})" id="cbox{{$value->id}}">
                                         </td>
                                         <td>{{$key+1}}</td>
                                         <td>{{$value->name}}</td>
-                                        <td><input type="number" name="quantity[]" id="{{$value->id}}"></td>
+                                        <td><input type="number" name="quantity[]" id="{{$value->id}}"
+                                                onclick="addcheck({{$value->id}})" onblur="validateCbox({{$value->id}})"
+                                                class="dataT"></td>
 
                                     </tr>
                                     @endforeach
@@ -256,12 +265,15 @@
     </section>
 
 </div>
+
 <script>
 const orderfood = @json($orderfood);
 const products = @json($products);
 var regex = /^[0-9]$/;
 let arrayidproducts = [];
 let arrayidquantity = [];
+
+
 
 for (var i = 0; i < orderfood.products.length; i++) {
 
