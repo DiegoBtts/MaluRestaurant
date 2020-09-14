@@ -1,5 +1,9 @@
 @extends('plantilla')
-
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="..\css\iconic\css\material-design-iconic-font.min.css" />
+<link rel="stylesheet" type="text/css" href="..\css\util.css" />
+<link rel="stylesheet" type="text/css" href="..\css\main.css" />
+<!--===============================================================================================-->
 @section('content')
 
 <div class="limiter">
