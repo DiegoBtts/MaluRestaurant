@@ -2,65 +2,51 @@
 
 @section('content')
 
-<div id="back"></div>
+<div class="limiter">
+    <div class="container-login100" style="background-image: url(../img/plantilla/bg-01.jpg)">
+        <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
 
-<div class="style-logo">
-    <a href="#" style="color: white !important">
-        <div class="login-log">
-            <img id=" Image-login" src="{{ asset('mpdf/resultados/example.png') }}" style="width: 100%; margin-left: auto;
-    margin-right: auto;
-    display: block;">
-        </div>
+            <span class="login100-form-title p-b-49"> Restaurante Malu </span>
+            <form action="" method="post" class="login100-form validate-form">
 
-    </a>
-</div>
+                {{ csrf_field() }}
+                <div class="wrap-input100 validate-input m-b-23" data-validate="Username is reauired">
+                    <span class="label-input100">Usuario</span>
+                    <input class="input100" type="text" name="username" placeholder="Ingresa Usuario" />
+                    <span class="focus-input100" data-symbol="&#xf206;"></span>
+                </div>
 
-<div class="login-box login-margin">
+                <div class="wrap-input100 validate-input" data-validate="Password is required">
+                    <span class="label-input100">Password</span>
+                    <input class="input100" type="password" name="password" placeholder="Ingresa Contraseña" />
+                    <span class="focus-input100" data-symbol="&#xf190;"></span>
+                </div>
 
-    <!-- /.login-logo -->
-    <div class="login-box">
+                <div class="text-right p-t-8 p-b-31">
+                    <a href="#"> Forgot password? </a>
+                </div>
 
-        <div id="backCard">
+                <div class="container-login100-form-btn">
+                    <div class="wrap-login100-form-btn">
+                        <div class="login100-form-bgbtn"></div>
+                        <button type="submit" class="login100-form-btn">Ingresar</button>
+                    </div>
+                </div>
 
-            <h1>Iniciar sesión<h1>
-
-                    <form action="" method="post">
-
-                        {{ csrf_field() }}
-
-                        <div class="input-group mb-3">
-
-                            <p>Usuario</p>
-                            <input type="text" name="username" placeholder="Ingresa Usuario" />
-
-                        </div>
-
-                        <div class="input-group mb-3">
-
-                            <p>Contraseña</p>
-                            <input type="password" name="password" placeholder="Ingresa Contraseña" />
-
-                        </div>
-
-                        <div>
-                            <div>
-                                <button type="submit"
-                                    class="btn btn-primary btn-block btn-flat login-button">Ingresar</button>
-                            </div>
-                        </div>
-
-                        <?php 
+                <div class="flex-col-c p-t-155">
+                    <span class="txt1 p-b-17"> </span>
+                </div>
+                <?php 
           if (isset($mensaje_error))
           {
               echo '<br><div class=" alert alert-danger">Contraseña y/o usuario incorrectos</div>';
           }
         ?>
-                    </form>
-
+            </form>
         </div>
-
     </div>
-
 </div>
+
+<div id="dropDownSelect1"></div>
 
 @stop
