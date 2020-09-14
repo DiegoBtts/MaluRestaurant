@@ -11,6 +11,7 @@
         <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
 
             <span class="login100-form-title p-b-49"> Restaurante Malu </span>
+            <div id="prueba"></div>
             <form action="" method="post" class="login100-form validate-form">
 
                 {{ csrf_field() }}
