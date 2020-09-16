@@ -438,4 +438,5 @@ $('#search').on('keyup', function(e) {
 </style>
 <script src="{{ asset('js/sell.js')}}"></script>
 
+
 @stop

@@ -1,5 +1,5 @@
 @extends('panel.layout')
-
+<link rel="stylesheet" href="{{asset('css/responsive.dataTables.min.css')}}">
 @section('content-panel')
 
 <div class="content-wrapper">
@@ -39,7 +39,7 @@
 
             <div class="card-body">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
-                <table class="table table-bordered table-hover tableProduct">
+                <table class="table table-bordered table-hover tableProduct" id="tproduct">
 
                     <thead>
 
@@ -87,5 +87,6 @@
 
 
 <script src="{{ asset('js/product.js')}}"></script>
-
+<script src="{{asset('js/dataTables.responsive.min.js')}}"></script>
+<script src="{{asset('js/datatables.min.js')}}"></script>
 @stop
