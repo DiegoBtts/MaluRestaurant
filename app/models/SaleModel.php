@@ -11,7 +11,6 @@ class SaleModel extends Model
     protected $fillable = [
     	'id',
     	'total',
-    	'payment_method',
-    	'list_appointment'
+    	'payment_method'
     ];
 }

@@ -17,12 +17,12 @@ class CreateOrdeFoodTable extends Migration
             $table->bigIncrements('id');
             $table->date("date");
             $table->string("hour");
-            $table->string("name");
-            $table->string("last_name");
+            $table->string("name")->nullable();
+            $table->string("last_name")->nullable();
             $table->string("ordertype");
-            $table->string("address");
-            $table->string("phone");
-            $table->string("tablenumber");
+            $table->string("address")->nullable();
+            $table->string("phone")->nullable();
+            $table->string("tablenumber")->nullable();
             $table->integer("status");
             $table->json("products");
             $table->json("quantity");
@@ -39,6 +39,6 @@ class CreateOrdeFoodTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orde_food');
+        Schema::dropIfExists('orderfood');
     }
 }

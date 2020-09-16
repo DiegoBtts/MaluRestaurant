@@ -207,27 +207,81 @@
 
         <div class="modal-content">
 
-            <input type="hidden" name="_token" value="{{ csrf_token() }}" id="tokenSell">
-
             <div class="modal-body">
 
-                <div class="row">
+                <form action="{{route('sell.save',$sales)}}" method="post" id="formsell">
+                    {{ csrf_field() }}
 
-                    <div class="col-md-12">
+                    <div class=" row">
 
-                        <div class="row">
+                        <div class="col-md-12">
 
-                            <div class="col-md-12">
+                            <div class="input-group">
 
-                                <h3 class="text-center"><b>Total de venta</b></h3>
+                                <div class="input-group-btn mx-auto" data-toggle="buttons" id="Options">
+                                    <h3 class="text-center">Metodo de pago.</h3>
+                                    <label class="btn btn-primary active">
+                                        <i class="fas fa-money-bill-wave fa-5x"></i>
+                                        <br>
+                                        <input type="radio" name="options" id="option1" autocomplete="off"
+                                            value="Efectivo" checked>Efectivo
+                                    </label>
+                                    <label class="btn btn-primary">
+                                        <i class="fas fa-credit-card fa-5x"></i>
+                                        <br>
+                                        <input type="radio" name="options" id="option2" autocomplete="off"
+                                            value="Tarjeta">Tarjeta
+                                    </label>
+
+                                </div>
+
+                            </div>
+                            <div class="input-group">
+                                <label for="totalSales" class="col-sm-4 col-form-label">Total:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext" id="totalSales"
+                                        name="totalSales">
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label for="comanda" class="col-sm-4 col-form-label">Núm. de comanda:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext" id="comanda"
+                                        name="comanda">
+                                </div>
+                            </div>
+
+
+                            <div class="input-group mb-3">
+
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" onclick="getFocus('payment')">
+                                        <i class="fas fa-hand-holding-usd"></i></span>
+                                </div>
+                                <input type="number" name="payment" id="payment" placeholder="Pago con"
+                                    class="form-control form-control-lg" name="pago" required>
+                                <br>
+                                <p id="error"></p>
 
                             </div>
 
-                            <div class="col-md-12">
+                        </div>
+                        <br>
+                        <div class="col-md-12">
 
-                                <div class="pull-left">
+                            <div class="row">
 
-                                    <p class="totalLetter text-center">$<span id="total-two">0.0</span></p>
+                                <div class=" col-sm-6 btn-group">
+
+                                    <button id="cancel" type="button" class="btn btn-danger .px-2 "
+                                        data-dismiss="modal"><i class="fa fa-times"></i> Eliminar</button>
+
+                                </div>
+
+                                <div class=" col-sm-6 btn-group">
+
+                                    <button type="submit" id="sale" class="btn btn-success .px-2"><i
+                                            class="fa fa-shopping-cart"></i> Cobrar</button>
 
                                 </div>
 
@@ -236,68 +290,7 @@
                         </div>
 
                     </div>
-
-                    <div class="col-md-12">
-
-                        <div class="input-group">
-
-                            <div class="input-group-btn mx-auto" data-toggle="buttons" id="Options">
-                                <label class="btn btn-primary active">
-                                    <i class="fas fa-money-bill-wave fa-5x"></i>
-                                    <br>
-                                    <input type="radio" name="options" id="option1" autocomplete="off" checked>Efectivo
-                                </label>
-                                <label class="btn btn-primary">
-                                    <i class="fas fa-credit-card fa-5x"></i>
-                                    <br>
-                                    <input type="radio" name="options" id="option2" autocomplete="off">Tarjeta
-                                </label>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="input-group mb-3">
-
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" onclick="getFocus('stockA')">
-                                    <i class="fas fa-hand-holding-usd"></i></span>
-                            </div>
-                            <input type="number" name="payment" id="payment" placeholder="Pago con"
-                                class="form-control form-control-lg" required>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="modal-footer justify-content">
-
-                <div class="col-sm container-fluid">
-
-                    <div class="row">
-
-                        <div class=" col-sm-6 btn-group">
-
-                            <button id="cancel" type="button" class="btn btn-danger .px-2 " data-dismiss="modal"><i
-                                    class="fa fa-times"></i> Eliminar</button>
-
-                        </div>
-
-                        <div class=" col-sm-6 btn-group">
-
-                            <button type="button" id="sale" class="btn btn-success .px-2" data-dismiss="modal"><i
-                                    class="fa fa-shopping-cart"></i> Cobrar</button>
-
-                        </div>
-
-                    </div>
-
-                </div>
+                </form>
 
             </div>
 

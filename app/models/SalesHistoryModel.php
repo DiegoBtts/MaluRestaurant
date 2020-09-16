@@ -11,7 +11,6 @@ class SalesHistoryModel extends Model
     protected $fillable = [
     	'total',
     	'payment_method',
-        'list_appointment',
         'created_at'
     ];
 }

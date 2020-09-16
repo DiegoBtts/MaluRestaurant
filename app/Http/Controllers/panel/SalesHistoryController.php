@@ -15,18 +15,9 @@ class SalesHistoryController extends Controller
 {
     public function index()
 	{
-        $sales = SaleModel::all()->sortBy('created_at');
-        foreach ($sales as $key => $value) 
-        {
-            $ids = array_column(json_decode($value["list_appointment"]),'id');
-            $ids_string = implode(',', $ids);
-
-            $appointments = Helper::conectar()->prepare("Select a.id, a.appointment_code, g.table_name, g.price from appointment a inner join groups g on g.id=a.exam_id where a.id in ({$ids_string})");
-            $appointments->execute();
-            $value["appointments"] = $appointments->fetchAll();
-        }
-		return view('panel.saleshistory.index', ['items' => $sales
-		]);
+        $sales = SaleModel::all();
+        
+		return view('panel.saleshistory.index', ['items' => $sales]);
 	}
     
     public function delete($id)
