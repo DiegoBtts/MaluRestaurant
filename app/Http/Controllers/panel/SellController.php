@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Panel;
 
 use Illuminate\Http\Request;
-use App\models\SellModel;
 use App\models\OrderFoodModel;
 use App\models\ProductsModel;
 use App\Http\Controllers\Controller;
@@ -13,26 +12,23 @@ class SellController extends Controller
 {
     public function index()
 	{     
-		return view('panel.sell.index')->with(['orderfood' => new orderfoodModel()]);
+		return view('panel.sell.index')->with(['sales' => new SaleModel()]);
 	}
 
     public function save(Request $request) 
     {
+        $orderfood = OrderFoodModel::find($request->comanda);
+        $orderfood->status = 1;
+        $orderfood->save();
+        
         $sale = new SaleModel();
-        $list_orderfood = json_decode($request->input("listOrderFood"),true);
-
-        foreach ($list_orderfood as $key => $value) 
-        {
-            $orderfood = OrderFoodModel::find($value["id"]);
-            $orderfood->status = 1;
-            $orderfood->save();
-        }
-
-        $sale->total = $request->input("total");
-        $sale->payment_method = $request->input("payment_method");
-        $sale->list_orderfood = $request->input("listOrderFood");
+        $sale->total = $request->totalSales;
+        $sale->payment_method = $request->options;
+        $sale->orderfood = $request->comanda;
         $sale->save();
-        return response()->json($sale->id);
+        
+        session()->flash('messages', 'success|Gracias por su compra' );
+        return redirect()->route('sell');
     }
 
 	//este fue el nuevo metodo que implemente

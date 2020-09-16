@@ -4,20 +4,17 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTableSale extends Migration
+class CreateSalesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string("total",50);
             $table->string("payment_method",50);
-            $table->longText("list_appointment");
+            $table->bigInteger("orderfood")->unsigned();
+            $table->foreign("orderfood")->references("id")->on("orderfood")->onDelete("cascade");
             $table->timestamps();
         });
     }
