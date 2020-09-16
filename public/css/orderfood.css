@@ -13,3 +13,14 @@ label {
     margin-top: 0.5rem;
 }
 
+.radondy:hover {
+    background-color: #0062cc;
+}
+.radondy:visited {
+    background-color: #0062cc;
+}
+.radondy {
+    background-color: #007bff;
+}
+
+

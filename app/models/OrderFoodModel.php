@@ -12,6 +12,8 @@ class OrderFoodModel extends Model
         'id',
         'date',
         'hour',
+        'name',
+        'last_name',
     	'ordertype',
     	'address',
         'phone',

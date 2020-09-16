@@ -39,18 +39,19 @@ class OrderFoodController extends Controller
 
     public function save(Request $request, OrderFoodModel $orderfood ) 
     {
-        
-        $date = $request->input('date')!=null?$request->input('date'):date('Y-m-d');
-        $hour = $request->input('hour')!=null?$request->input('hour'):date('H:i:s');
+        $date = strftime("%Y-%m-%d");
+        $hour = strftime("%H:%M:%S");
         $orderfood->date = $date;
         $orderfood->hour = $hour; 
         $orderfood->ordertype = $request->input('ordertype');
+        $orderfood->name = $request->input('name');
+        $orderfood->last_name = $request->input('last_name');
         $orderfood->address = $request->input('address');
         $orderfood->phone = $request->input('phone');
         $orderfood->tablenumber = $request->input('tablenumber');
         $orderfood->status = 0;
         $orderfood->products =json_encode($request->input('products'));
-        $orderfood->quantity =json_encode($request->input('quantity'));
+        $orderfood->quantity =json_encode(array_values(array_filter($request->input('quantity'))));
         
         $orderfood->save();
         

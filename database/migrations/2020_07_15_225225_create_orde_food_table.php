@@ -17,6 +17,8 @@ class CreateOrdeFoodTable extends Migration
             $table->bigIncrements('id');
             $table->date("date");
             $table->string("hour");
+            $table->string("name");
+            $table->string("last_name");
             $table->string("ordertype");
             $table->string("address");
             $table->string("phone");
