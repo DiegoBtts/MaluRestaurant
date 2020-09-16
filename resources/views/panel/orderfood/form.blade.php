@@ -157,6 +157,48 @@
                             </div>
 
                         </div>
+
+
+                        <div class="col-md-6" id="dname">
+                            <label class="label-style" for="address">Nombre</label>
+
+                            <div class="input-group mb-3">
+
+                                <div class="input-group-prepend">
+
+                                    <span class="input-group-text" onclick="getFocus('name')"><i
+                                            class="fas fa-map-marker-alt"></i></span>
+
+                                </div>
+
+                                <input type="text" step="any" id="name" name="name" placeholder="Nombre"
+                                    class="form-control form-control-lg" value="{{$orderfood->name}}">
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6" id="dlast_name">
+                            <label class="label-style" for="address">Apellido</label>
+
+                            <div class="input-group mb-3">
+
+                                <div class="input-group-prepend">
+
+                                    <span class="input-group-text" onclick="getFocus('last_name')"><i
+                                            class="fas fa-map-marker-alt"></i></span>
+
+                                </div>
+
+                                <input type="text" step="any" id="last_name" name="last_name" placeholder="Apellido"
+                                    class="form-control form-control-lg" value="{{$orderfood->last_name}}">
+
+                            </div>
+
+                        </div>
+
+
+
                         <div class="col-md-6" id="daddress">
                             <label class="label-style" for="address">Domicilio</label>
 

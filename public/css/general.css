@@ -11,10 +11,12 @@
 }
 
 .style-logo {
-    background: #00000075;
+    margin: auto;
     width: 30vh;
-    height: 23vh;
-    margin: 10px;
+    height: 19vh;
+}
+
+.user {
 }
 
 #backCard {

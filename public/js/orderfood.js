@@ -55,16 +55,25 @@ function CheckValuesOrder(value) {
         $("#tablenumber").hide("fast");
         $("#daddress").show("fast");
         $("#dphone").show("fast");
+        $("#dname").show("fast");
+        $("#dlast_name").show("fast");
         $("#phone").attr("required", true);
         $("#address").attr("required", true);
+        $("#dname").attr("required", true);
+        $("#dlast_name").attr("required", true);
         $(".options").attr("required", false);
     } else if (value == "Restaurante") {
         $("#tablenumber").show("fast");
         $("#daddress").hide("fast");
         $("#dphone").hide("fast");
+        $("#dname").hide("fast");
+         $("#dlast_name").hide("fast");
         $("#phone").attr("required", false);
         $("#address").attr("required", false);
+        $("#dname").attr("required", false);
+        $("#dlast_name").attr("required", false);
         $(".options").attr("required", true);
+        
     }
 }
 

@@ -250,7 +250,7 @@ iframe {
 
 .label-input100 {
   font-family: Poppins-Regular;
-  font-size: 14px;
+  font-size: 20px;
   color: #ffffff;
   line-height: 1.5;
   padding-left: 7px;
@@ -258,8 +258,8 @@ iframe {
 
 .input100 {
   font-family: Poppins-Medium;
-  font-size: 16px;
-  color: #333333;
+  font-size: 18px;
+  color: #ffffff;
   line-height: 1.2;
 
   display: block;
@@ -269,6 +269,9 @@ iframe {
   padding: 0 7px 0 43px;
 }
 
+#pass{
+  font-size: 18px;
+}
 /*---------------------------------------------*/
 .focus-input100 {
   position: absolute;
@@ -325,11 +328,11 @@ iframe {
 }
 
 .input100:focus + .focus-input100::after {
-  color: #a64bf4;
+  color: #f4db4b;
 }
 
 .has-val.input100 + .focus-input100::after {
-  color: #a64bf4;
+  color: #f4db4b;
 }
 
 /*------------------------------------------------------------------
@@ -368,14 +371,14 @@ iframe {
   background: #a64bf4;
   background: -webkit-linear-gradient(
     right,
-    #00dbde,
-    #fc00ff,
-    #00dbde,
-    #fc00ff
+    #804000,
+    #000000,
+    #804000,
+    #000000
   );
-  background: -o-linear-gradient(right, #00dbde, #fc00ff, #00dbde, #fc00ff);
-  background: -moz-linear-gradient(right, #00dbde, #fc00ff, #00dbde, #fc00ff);
-  background: linear-gradient(right, #00dbde, #fc00ff, #00dbde, #fc00ff);
+  background: -o-linear-gradient(right, #804000, #000000, #804000, #000000);
+  background: -moz-linear-gradient(right, #804000, #000000, #804000, #000000);
+  background: linear-gradient(right, #804000, #000000, #804000, #000000);
   top: 0;
   left: -100%;
 
