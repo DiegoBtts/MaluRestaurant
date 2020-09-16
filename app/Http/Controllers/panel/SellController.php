@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Panel;
 use Illuminate\Http\Request;
 use App\models\SellModel;
 use App\models\OrderFoodModel;
+use App\models\ProductsModel;
 use App\Http\Controllers\Controller;
 use App\models\SaleModel;
 
@@ -37,18 +38,25 @@ class SellController extends Controller
 	//este fue el nuevo metodo que implemente
     public function search(Request $request) 
     {
-        $res = [];
-    	$code = $request->input("code");
-    	$appointment  = AppointmentModel::where("appointment_code","=",$code)->get();
-        if (count($appointment)!=0)
-        {       
-            $group = GroupsModel::find($appointment[0]["exam_id"]);
-            $test = TestTypeModel::find($group->typeTest_id);
-            array_push($res, $appointment[0]["appointment_code"]);
-            array_push($res, $group->price);
-            array_push($res, $test->description);
-            array_push($res, $appointment[0]["id"]);
+        $productsList=array();
+        $quantityList=array();
+        $res=array();
+        $results = OrderFoodModel::find($request->id);
+        for($i = 0; $i<strlen ( $results->products);$i++){
+            if($results->products[$i]!='"' &&$results->products[$i]!='['&& $results->products[$i]!=']' && $results->products[$i]!=','){
+              array_push($productsList,$results->products[$i]);   
+            }  
         }
-        return response()->json($res);
+        for($i = 0; $i<strlen ( $results->quantity);$i++){
+            if($results->quantity[$i]!='"' &&$results->quantity[$i]!='['&& $results->quantity[$i]!=']' && $results->quantity[$i]!=','){
+              array_push($quantityList,$results->quantity[$i]);   
+            }  
+        }
+        for($j = 0; $j<sizeof($productsList);$j++){
+            $product = ProductsModel::find($productsList[$j]);
+            array_push($res,["nombre"=>$product->name,"precio"=>$product->price,"cantidad"=>$quantityList[$j],"product_id"=>$product->id,"orderfood_id"=>$results->id]);
+        }
+          
+        return ($res);
     }
 }

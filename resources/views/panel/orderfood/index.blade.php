@@ -59,7 +59,7 @@
 
                         @foreach($items as $key => $value)
                         <tr>
-                            <td>{{$key+1}}</td>
+                            <td>{{$value->id}}</td>
                             <td>{{$value->ordertype}}</td>
                             <td>{{$value->date}}</td>
                             <td>{{$value->hour}}</td>

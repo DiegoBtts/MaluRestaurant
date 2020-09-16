@@ -20,16 +20,10 @@ class helper
         return $res;
 	}
 
-	public static function getOrderFood($id)
+	public static function getOrderFood($ordertype)
 	{
-		if ($id!=0)
-		{
-			return OrderFoodModel::find($id);
-		}
-		else
-		{
-			return OrderFoodModel::all();
-		}
+		$orderfood = OrderFoodModel::whereStatusAndOrdertype(0,$ordertype)->get();
+		return $orderfood;
 	}
 
 	public static function getSale($id)

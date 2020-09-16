@@ -13,7 +13,7 @@ class OrderFoodController extends Controller
 {
     public function index()
 	{
-        $orderfood = OrderFoodModel::all();
+        $orderfood = OrderFoodModel::whereStatus(0)->get();
 		return view('panel.orderfood.index', ['items' => $orderfood]);
 	}
 
