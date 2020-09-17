@@ -34,6 +34,9 @@
                                 <input type="text" id="search" name="search" placeholder="Codigo"
                                     class="form-control form-control-lg capitalize" autofocus>
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
+                                <div class="input-group-append" id="search2">
+                                    <span class="input-group-text"><i class="fa fa-fw fa-search"></i></span>
+                                </div>
 
                             </div>
 
@@ -453,6 +456,61 @@ $('#search').on('keyup', function(e) {
     }
 
 });
+$('#search2').click(function(e) {
+    if ($('#search').val() != 0) {
+        if ($("#content_table_sell").children().length == 0) {
+            console.log("entro al search");
+            $.ajax({
+                method: "POST",
+                url: "{{route('sell.search')}}",
+                data: {
+                    _token: "{!! csrf_token() !!}",
+                    id: $('#search').val()
+                },
+                success: function(respuesta) {
+                    console.log(respuesta);
+                    $('#search').val("");
+                    $('#search').attr("disabled", true);
+                    $('#find').removeAttr("data-toggle");
+
+                    comanda = respuesta[0].orderfood_id;
+                    res = respuesta;
+
+                    console.log(comanda);
+                    console.log(res);
+                    respuesta.forEach(t => {
+                        $("#content_table_sell").append(
+                            "<tr><td>" + t.product_id +
+                            "</td><td>" + t.nombre +
+                            "</td><td class='precio'>" + t.precio +
+                            "</td><td class='cantidad'>" + t.cantidad +
+                            "</td></tr>"
+                        );
+                        total = total + (t.precio * t.cantidad);
+                    });
+                    $('#total').text(total);
+
+                },
+                error: function() {
+                    $('#search').val("");
+                    swal.fire("¡Error!", "No se encuentra una comanda con ese codigo.", "error");
+                }
+            });
+        } else {
+            console.log("entro al else");
+            $('#search').val("");
+            $('#search').attr("disabled", true);
+            $('#find').removeAttr("data-toggle");
+            swal.fire("¡Cuidado!", "Comanda en venta. Finaliza la venta para cobrar otra comanda", "warning");
+        }
+    } else {
+        swal.fire("¡Error!", "Ingrese una comanda", "error");
+    }
+
+
+
+
+});
 
 $('#sale').on('click', function(e) {
     var metodo = "";
@@ -487,6 +545,7 @@ $('#sale').on('click', function(e) {
             $('#search').removeAttr("disabled");
             $('#find').attr('data-toggle', 'modal');
             swal("!Good job!", "Venta finalizada", "success");
+
         });
     } else {
         $('#error').text("Monto menor al total");
@@ -496,87 +555,108 @@ $('#sale').on('click', function(e) {
 });
 
 $('#busquedaD tbody tr').click(function() {
-    $('#code_search').modal('hide');
-    var id = $(this).find("td:first-child").text();
-    console.log(id);
-    $.ajax({
-        method: "POST",
-        url: "{{route('sell.search')}}",
-        data: {
-            _token: "{!! csrf_token() !!}",
-            id: id
-        },
-        success: function(respuesta) {
-            console.log(respuesta);
-            $('#search').val("");
-            $('#search').attr("disabled", true);
-            $('#find').removeAttr("data-toggle");
+    if ($("#content_table_sell").children().length == 0) {
+        $('#code_search').modal('hide');
+        var id = $(this).find("td:first-child").text();
+        console.log(id);
+        $.ajax({
+            method: "POST",
+            url: "{{route('sell.search')}}",
+            data: {
+                _token: "{!! csrf_token() !!}",
+                id: id
+            },
+            success: function(respuesta) {
+                console.log(respuesta);
+                $('#search').val("");
+                $('#search').attr("disabled", true);
+                $('#find').removeAttr("data-toggle");
 
-            comanda = respuesta[0].orderfood_id;
-            res = respuesta;
+                comanda = respuesta[0].orderfood_id;
+                res = respuesta;
 
-            console.log(comanda);
-            console.log(res);
-            respuesta.forEach(t => {
-                $("#content_table_sell").append(
-                    "<tr><td>" + t.product_id +
-                    "</td><td>" + t.nombre +
-                    "</td><td class='precio'>" + t.precio +
-                    "</td><td class='cantidad'>" + t.cantidad +
-                    "</td></tr>"
-                );
-                total = total + (t.precio * t.cantidad);
-            });
-            $('#total').text(total);
+                console.log(comanda);
+                console.log(res);
+                respuesta.forEach(t => {
+                    $("#content_table_sell").append(
+                        "<tr><td>" + t.product_id +
+                        "</td><td>" + t.nombre +
+                        "</td><td class='precio'>" + t.precio +
+                        "</td><td class='cantidad'>" + t.cantidad +
+                        "</td></tr>"
+                    );
+                    total = total + (t.precio * t.cantidad);
+                });
+                $('#total').text(total);
 
-        },
-        error: function() {
-            $('#search').val("");
-            swal.fire("¡Error!", "No se encuentra una comanda con ese codigo.", "error");
-        }
-    });
+            },
+            error: function() {
+                $('#search').val("");
+                swal.fire("¡Error!", "No se encuentra una comanda con ese codigo.", "error");
+            }
+        });
+    } else {
+        console.log("entro al else");
+        $('#search').val("");
+        $('#search').attr("disabled", true);
+        $('#find').removeAttr("data-toggle");
+        swal.fire("¡Cuidado!", "Comanda en venta. Finaliza la venta para cobrar otra comanda", "warning");
+    }
+
+
 });
 $('#busquedaR tbody tr').click(function() {
-    $('#code_search').modal('hide');
-    var id = $(this).find("td:first-child").text();
-    console.log(id);
-    $.ajax({
-        method: "POST",
-        url: "{{route('sell.search')}}",
-        data: {
-            _token: "{!! csrf_token() !!}",
-            id: id
-        },
-        success: function(respuesta) {
-            console.log(respuesta);
-            $('#search').val("");
-            $('#search').attr("disabled", true);
-            $('#find').removeAttr("data-toggle");
+    if ($("#content_table_sell").children().length == 0) {
+        $('#code_search').modal('hide');
+        var id = $(this).find("td:first-child").text();
+        console.log(id);
+        $.ajax({
+            method: "POST",
+            url: "{{route('sell.search')}}",
+            data: {
+                _token: "{!! csrf_token() !!}",
+                id: id
+            },
+            success: function(respuesta) {
+                console.log(respuesta);
+                $('#search').val("");
+                $('#search').attr("disabled", true);
+                $('#find').removeAttr("data-toggle");
 
-            comanda = respuesta[0].orderfood_id;
-            res = respuesta;
+                comanda = respuesta[0].orderfood_id;
+                res = respuesta;
 
-            console.log(comanda);
-            console.log(res);
-            respuesta.forEach(t => {
-                $("#content_table_sell").append(
-                    "<tr><td>" + t.product_id +
-                    "</td><td>" + t.nombre +
-                    "</td><td class='precio'>" + t.precio +
-                    "</td><td class='cantidad'>" + t.cantidad +
-                    "</td></tr>"
-                );
-                total = total + (t.precio * t.cantidad);
-            });
-            $('#total').text(total);
+                console.log(comanda);
+                console.log(res);
+                respuesta.forEach(t => {
+                    $("#content_table_sell").append(
+                        "<tr><td>" + t.product_id +
+                        "</td><td>" + t.nombre +
+                        "</td><td class='precio'>" + t.precio +
+                        "</td><td class='cantidad'>" + t.cantidad +
+                        "</td></tr>"
+                    );
+                    total = total + (t.precio * t.cantidad);
+                });
+                $('#total').text(total);
 
-        },
-        error: function() {
-            $('#search').val("");
-            swal.fire("¡Error!", "No se encuentra una comanda con ese codigo.", "error");
-        }
-    });
+            },
+            error: function() {
+                $('#search').val("");
+                swal.fire("¡Error!", "No se encuentra una comanda con ese codigo.", "error");
+            }
+        });
+    } else {
+        console.log("entro al else");
+        $('#search').val("");
+        $('#search').attr("disabled", true);
+        $('#find').removeAttr("data-toggle");
+        swal.fire("¡Cuidado!", "Comanda en venta. Finaliza la venta para cobrar otra comanda", "warning");
+    }
+
+
 });
+
 
 const orderfood = @json($orderfood);
 const products = @json($products);

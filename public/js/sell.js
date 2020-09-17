@@ -9,14 +9,18 @@ $('#action').click(function(){
     
 });
 $('#deleteAll').click(function(){
-    res.length=0;
-    comanda.length=0;
+    res=0;
+    comanda=0;
     total=0;
+    $('#search').removeAttr("disabled");
+    $('#find').attr('data-toggle', 'modal');
     $("#content_table_sell td").remove();
     $('#total').text("");
     $('#totalSales').val("");  
     $('#comanda').val("");
     $('#action').removeAttr('data-toggle'); 
+    console.log($("#content_table_sell").children().length);
+    
 });
 
 $(document).ready(function() {
