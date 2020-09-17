@@ -6,13 +6,23 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
+    $("#ok").DataTable({
+        responsive: true,
+        searching: false,
+    });
+});
+
+$(document).ready(function () {
     $("#example").DataTable({
         aLengthMenu: [
             [5, 10, 25, -1],
             [5, 10, 25, "All"],
         ],
         iDisplayLength: 5,
+        responsive: true,
+        searching: false,
     });
+
 });
 
 function checkAll(bx) {
@@ -23,8 +33,6 @@ function checkAll(bx) {
         }
     }
 }
-
-
 
 $(".tableOrderFood tbody").on("click", "button#delete", function () {
     var OrderFoodId = $(this).attr("OrderFoodId");
@@ -67,13 +75,12 @@ function CheckValuesOrder(value) {
         $("#daddress").hide("fast");
         $("#dphone").hide("fast");
         $("#dname").hide("fast");
-         $("#dlast_name").hide("fast");
+        $("#dlast_name").hide("fast");
         $("#phone").attr("required", false);
         $("#address").attr("required", false);
         $("#dname").attr("required", false);
         $("#dlast_name").attr("required", false);
         $(".options").attr("required", true);
-        
     }
 }
 
@@ -126,4 +133,3 @@ function btnTables(value, id) {
         $("#radonly" + id).css("background-color", "blue");
     });
 }
-

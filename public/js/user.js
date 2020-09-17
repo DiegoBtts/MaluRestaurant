@@ -1,5 +1,8 @@
-$(".tableUser").dataTable();
-
+$(document).ready(function () {
+    $(".tableUser").DataTable({
+        responsive: true,
+    });
+});
 $(".tableUser tbody").on("click","button#delete",function()
 {
 	var UserId = $(this).attr("UserId");

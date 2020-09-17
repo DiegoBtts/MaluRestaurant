@@ -1,5 +1,5 @@
 @extends('panel.layout')
-
+<link rel="stylesheet" href="{{asset('css/responsive.dataTables.min.css')}}">
 @section('content-panel')
 
 <link rel="stylesheet" href="{{ asset('css/orderfood.css')}}">
@@ -307,7 +307,8 @@
     </section>
 
 </div>
-
+<script src="{{asset('js/dataTables.responsive.min.js')}}"></script>
+<script src="{{asset('js/datatables.min.js')}}"></script>
 <script>
 const orderfood = @json($orderfood);
 const products = @json($products);
@@ -350,5 +351,6 @@ if (orderfood.ordertype == document.getElementById("order").value) {
 }
 </script>
 
+<!-- extension responsive -->
 
 @stop

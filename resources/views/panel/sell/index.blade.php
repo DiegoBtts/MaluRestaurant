@@ -17,7 +17,7 @@
                         <div class="col-md-12">
 
                             <h1>Ventas</h1>
-
+                            <input type="button" value="imprimir" id="btnImprimir">
                         </div>
 
                         <div class="col-md-12">
@@ -397,6 +397,7 @@
 
 </div>
 
+
 <script type="text/javascript">
 var total = 0;
 let res = 0;
@@ -709,5 +710,6 @@ console.log(
 }
 </style>
 <script src="{{ asset('js/sell.js')}}"></script>
+
 
 @stop

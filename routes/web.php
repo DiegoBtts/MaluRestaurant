@@ -99,6 +99,11 @@ Route::group(['middleware' => 'auth' ], function()
         'as'=> 'sell.save'
     ]);
 
+    Route::get('/sell/Ticket', [
+        'uses' => 'Panel\SellController@Ticket',
+        'as'=> 'sell/Ticket'
+    ]);
+
     /* SalesHistory*/
 
     Route::get('/saleshistory', [
