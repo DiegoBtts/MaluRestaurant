@@ -408,7 +408,7 @@ $(document).ready(function() {
 $('#search').on('keyup', function(e) {
 
     if (e.keyCode == 13) {
-        if ($("#content_table_sell").children().length == 0) {
+        if ($("#content_table_sell td").length == 0) {
             console.log("entro al search");
             $.ajax({
                 method: "POST",
@@ -459,7 +459,7 @@ $('#search').on('keyup', function(e) {
 });
 $('#search2').click(function(e) {
     if ($('#search').val() != 0) {
-        if ($("#content_table_sell").children().length == 0) {
+        if ($("#content_table_sell td").length == 0) {
             console.log("entro al search");
             $.ajax({
                 method: "POST",
@@ -556,7 +556,7 @@ $('#sale').on('click', function(e) {
 });
 
 $('#busquedaD tbody tr').click(function() {
-    if ($("#content_table_sell").children().length == 0) {
+    if ($("#content_table_sell td").length == 0) {
         $('#code_search').modal('hide');
         var id = $(this).find("td:first-child").text();
         console.log(id);
@@ -607,7 +607,7 @@ $('#busquedaD tbody tr').click(function() {
 
 });
 $('#busquedaR tbody tr').click(function() {
-    if ($("#content_table_sell").children().length == 0) {
+    if ($("#content_table_sell td").length == 0) {
         $('#code_search').modal('hide');
         var id = $(this).find("td:first-child").text();
         console.log(id);

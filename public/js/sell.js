@@ -19,7 +19,7 @@ $('#deleteAll').click(function(){
     $('#totalSales').val("");  
     $('#comanda').val("");
     $('#action').removeAttr('data-toggle'); 
-    console.log($("#content_table_sell").children().length);
+    console.log($("#content_table_sell td").length);
     
 });
 
