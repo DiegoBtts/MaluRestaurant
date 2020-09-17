@@ -209,33 +209,31 @@
 
             <div class="modal-body">
 
-                <form action="{{route('sell.save',$sales)}}" method="post" id="formsell">
-                    {{ csrf_field() }}
+                <div class="modal-body">
 
-                    <div class=" row">
+                    <div class="row">
 
                         <div class="col-md-12">
-
+                            <h3 class="text-center">Metodo de pago</h3>
                             <div class="input-group">
 
                                 <div class="input-group-btn mx-auto" data-toggle="buttons" id="Options">
-                                    <h3 class="text-center">Metodo de pago.</h3>
                                     <label class="btn btn-primary active">
                                         <i class="fas fa-money-bill-wave fa-5x"></i>
                                         <br>
                                         <input type="radio" name="options" id="option1" autocomplete="off"
-                                            value="Efectivo" checked>Efectivo
+                                            checked>Efectivo
                                     </label>
                                     <label class="btn btn-primary">
                                         <i class="fas fa-credit-card fa-5x"></i>
                                         <br>
-                                        <input type="radio" name="options" id="option2" autocomplete="off"
-                                            value="Tarjeta">Tarjeta
+                                        <input type="radio" name="options" id="option2" autocomplete="off">Tarjeta
                                     </label>
 
                                 </div>
 
                             </div>
+
                             <div class="input-group">
                                 <label for="totalSales" class="col-sm-4 col-form-label">Total:</label>
                                 <div class="col-sm-8">
@@ -243,6 +241,7 @@
                                         name="totalSales">
                                 </div>
                             </div>
+
                             <div class="input-group">
                                 <label for="comanda" class="col-sm-4 col-form-label">Núm. de comanda:</label>
                                 <div class="col-sm-8">
@@ -252,45 +251,49 @@
                             </div>
 
 
-                            <div class="input-group mb-3">
+                            <div class="input-group">
 
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" onclick="getFocus('payment')">
                                         <i class="fas fa-hand-holding-usd"></i></span>
                                 </div>
                                 <input type="number" name="payment" id="payment" placeholder="Pago con"
-                                    class="form-control form-control-lg" name="pago" required>
-                                <br>
-                                <p id="error"></p>
+                                    class="form-control form-control-lg" required>
+
+                            </div>
+                            <p id="error"></p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="modal-footer justify-content">
+
+                    <div class="col-sm container-fluid">
+
+                        <div class="row">
+
+                            <div class=" col-sm-6 btn-group">
+
+                                <button id="cancel" type="button" class="btn btn-danger .px-2 " data-dismiss="modal"><i
+                                        class="fa fa-times"></i> Cancelar</button>
 
                             </div>
 
-                        </div>
-                        <br>
-                        <div class="col-md-12">
+                            <div class=" col-sm-6 btn-group">
 
-                            <div class="row">
-
-                                <div class=" col-sm-6 btn-group">
-
-                                    <button id="cancel" type="button" class="btn btn-danger .px-2 "
-                                        data-dismiss="modal"><i class="fa fa-times"></i> Eliminar</button>
-
-                                </div>
-
-                                <div class=" col-sm-6 btn-group">
-
-                                    <button type="submit" id="sale" class="btn btn-success .px-2"><i
-                                            class="fa fa-shopping-cart"></i> Cobrar</button>
-
-                                </div>
+                                <button type="button" id="sale" class="btn btn-success .px-2"><i
+                                        class="fa fa-shopping-cart"></i> Cobrar</button>
 
                             </div>
 
                         </div>
 
                     </div>
-                </form>
+
+                </div>
 
             </div>
 
@@ -319,36 +322,51 @@
                     </label>
                     <br>
                     <div id="restauranteList">
-
-                        <b id=" etiquetas">Codigo:&nbsp;&nbsp;&nbsp;Tipo de orden:&nbsp;&nbsp;&nbsp;Número de mesa:</b>
-                        <div class="search_list">
-
-                            <ul class="list-group find_code" id="List">
-
+                        <table class="table table-striped table-bordered" id="busquedaR">
+                            <thead>
+                                <tr>
+                                    <th>Codigo</th>
+                                    <th>Tipo de orden</th>
+                                    <th>Num. de mesa</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                                 @foreach(\Helper::getOrderFood("restaurante") as $value)
-                                <li class="list-group-item" code="{{$value->id}}">{{$value->id}}
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{$value->ordertype}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{$value->tablenumber}}
-                                </li>
+                                <tr>
+                                    <td>{{$value->id}}</td>
+                                    <td>{{$value->ordertype}}</td>
+                                    <td>{{$value->tablenumber}}</td>
+                                </tr>
                                 @endforeach
+                            </tbody>
+                        </table>
 
-                            </ul>
-                        </div>
                     </div>
                     <div id="domicilioList" display="block">
-
-                        <b id=" etiquetas">Codigo:&nbsp;&nbsp;&nbsp;Tipo de orden:&nbsp;&nbsp;&nbsp;Teléfono:</b>
-                        <div class="search_list">
-
-                            <ul class="list-group find_code" id="List">
-
+                        <table class="table table-striped table-bordered" id="busquedaD">
+                            <thead>
+                                <tr>
+                                    <th>Codigo</th>
+                                    <th>Tipo de orden</th>
+                                    <th>Nombre</th>
+                                    <th>Telefono</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                                 @foreach(\Helper::getOrderFood("domicilio") as $value)
-                                <li class="list-group-item" code="{{$value->id}}">{{$value->id}}
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{$value->ordertype}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{$value->phone}}
-                                </li>
-                                @endforeach
+                                <tr>
 
-                            </ul>
-                        </div>
+                                    <td>{{$value->id}}</td>
+                                    <td>{{$value->ordertype}}</td>
+                                    <td>{{$value->name}}</td>
+                                    <td>{{$value->phone}}</td>
+
+
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+
                     </div>
 
                 </div>
@@ -379,47 +397,228 @@
 <script type="text/javascript">
 var total = 0;
 let res = 0;
-const comanda = [];
+let comanda = 0;
 $(document).ready(function() {
-    @if(isset($message))
-    for (var i = 0; i < 4; i++) {
-        toastr.warning('{{$message}}');
-    }
-    @endif
+
 })
 $('#search').on('keyup', function(e) {
+
     if (e.keyCode == 13) {
+        if ($("#content_table_sell").children().length == 0) {
+            console.log("entro al search");
+            $.ajax({
+                method: "POST",
+                url: "{{route('sell.search')}}",
+                data: {
+                    _token: "{!! csrf_token() !!}",
+                    id: $('#search').val()
+                },
+                success: function(respuesta) {
+                    console.log(respuesta);
+                    $('#search').val("");
+                    $('#search').attr("disabled", true);
+                    $('#find').removeAttr("data-toggle");
+
+                    comanda = respuesta[0].orderfood_id;
+                    res = respuesta;
+
+                    console.log(comanda);
+                    console.log(res);
+                    respuesta.forEach(t => {
+                        $("#content_table_sell").append(
+                            "<tr><td>" + t.product_id +
+                            "</td><td>" + t.nombre +
+                            "</td><td class='precio'>" + t.precio +
+                            "</td><td class='cantidad'>" + t.cantidad +
+                            "</td></tr>"
+                        );
+                        total = total + (t.precio * t.cantidad);
+                    });
+                    $('#total').text(total);
+
+                },
+                error: function() {
+                    $('#search').val("");
+                    swal.fire("¡Error!", "No se encuentra una comanda con ese codigo.", "error");
+                }
+            });
+        } else {
+            console.log("entro al else");
+            $('#search').val("");
+            $('#search').attr("disabled", true);
+            $('#find').removeAttr("data-toggle");
+            swal.fire("¡Cuidado!", "Comanda en venta. Finaliza la venta para cobrar otra comanda", "warning");
+        }
+
+    }
+
+});
+
+$('#sale').on('click', function(e) {
+    var metodo = "";
+    if ($('#option1').prop("checked")) {
+        metodo = "Efectivo";
+    } else {
+        metodo = "Tarjeta";
+    }
+    console.log(res);
+    if ($('#payment').val() >= $('#totalSales').val()) {
+
+        $('#sale').attr('data-dismiss', 'modal');
         $.ajax({
             method: "POST",
-            url: "{{route('sell.search')}}",
+            url: "{{route('sell.save')}}",
             data: {
                 _token: "{!! csrf_token() !!}",
-                id: $('#search').val()
-            },
-            success: function(respuesta) {
-                comanda.push(respuesta[0].orderfood_id)
-                res = respuesta;
-                $('#search').val("");
-                respuesta.forEach(t => {
-                    $("#content_table_sell").append(
-                        "<tr><td>" + t.product_id +
-                        "</td><td>" + t.nombre +
-                        "</td><td class='precio'>" + t.precio +
-                        "</td><td class='cantidad'>" + t.cantidad +
-                        "</td></tr>"
-                    );
-                    total = total + (t.precio * t.cantidad);
-                });;
-                $('#total').text(total);
-            },
-            error: function() {
-                $('#search').val("");
-                swal.fire("¡Error!", "No se encuentra una comanda con ese codigo.", "error");
+                res: res,
+                total: $('#totalSales').val(),
+                comanda: comanda,
+                options: metodo,
+                pago: $('#payment').val()
             }
+        }).done(function(respuesta) {
+
+            $("#content_table_sell td").remove();
+            $('#total_table').text(respuesta[0].total);
+            $('#payment_table').text(respuesta[0].pago);
+            $('#change_table').text(respuesta[0].cambio);
+            $('#total').text("");
+
+            $('#search').removeAttr("disabled");
+            $('#find').attr('data-toggle', 'modal');
+            swal("!Good job!", "Venta finalizada", "success");
         });
+    } else {
+        $('#error').text("Monto menor al total");
+        $('#error').css("color", "#ff0000");
 
     }
 });
+
+$('#busquedaD tbody tr').click(function() {
+    $('#code_search').modal('hide');
+    var id = $(this).find("td:first-child").text();
+    console.log(id);
+    $.ajax({
+        method: "POST",
+        url: "{{route('sell.search')}}",
+        data: {
+            _token: "{!! csrf_token() !!}",
+            id: id
+        },
+        success: function(respuesta) {
+            console.log(respuesta);
+            $('#search').val("");
+            $('#search').attr("disabled", true);
+            $('#find').removeAttr("data-toggle");
+
+            comanda = respuesta[0].orderfood_id;
+            res = respuesta;
+
+            console.log(comanda);
+            console.log(res);
+            respuesta.forEach(t => {
+                $("#content_table_sell").append(
+                    "<tr><td>" + t.product_id +
+                    "</td><td>" + t.nombre +
+                    "</td><td class='precio'>" + t.precio +
+                    "</td><td class='cantidad'>" + t.cantidad +
+                    "</td></tr>"
+                );
+                total = total + (t.precio * t.cantidad);
+            });
+            $('#total').text(total);
+
+        },
+        error: function() {
+            $('#search').val("");
+            swal.fire("¡Error!", "No se encuentra una comanda con ese codigo.", "error");
+        }
+    });
+});
+$('#busquedaR tbody tr').click(function() {
+    $('#code_search').modal('hide');
+    var id = $(this).find("td:first-child").text();
+    console.log(id);
+    $.ajax({
+        method: "POST",
+        url: "{{route('sell.search')}}",
+        data: {
+            _token: "{!! csrf_token() !!}",
+            id: id
+        },
+        success: function(respuesta) {
+            console.log(respuesta);
+            $('#search').val("");
+            $('#search').attr("disabled", true);
+            $('#find').removeAttr("data-toggle");
+
+            comanda = respuesta[0].orderfood_id;
+            res = respuesta;
+
+            console.log(comanda);
+            console.log(res);
+            respuesta.forEach(t => {
+                $("#content_table_sell").append(
+                    "<tr><td>" + t.product_id +
+                    "</td><td>" + t.nombre +
+                    "</td><td class='precio'>" + t.precio +
+                    "</td><td class='cantidad'>" + t.cantidad +
+                    "</td></tr>"
+                );
+                total = total + (t.precio * t.cantidad);
+            });
+            $('#total').text(total);
+
+        },
+        error: function() {
+            $('#search').val("");
+            swal.fire("¡Error!", "No se encuentra una comanda con ese codigo.", "error");
+        }
+    });
+});
+
+const orderfood = @json($orderfood);
+const products = @json($products);
+var regex = /^[0-9]$/;
+let arrayidproducts = [];
+let arrayidquantity = [];
+
+for (var i = 0; i < orderfood.products.length; i++) {
+
+    if (regex.test(orderfood.products[i])) {
+
+        arrayidproducts.push(orderfood.products[i]);
+        arrayidquantity.push(orderfood.quantity[i]);
+    }
+
+}
+let aux = [];
+for (var j = 0; j < arrayidproducts.length; j++) {
+    $("#content_table_sell").append(
+        "<tr><td>" + products[arrayidproducts[j]].id +
+        "</td><td>" + products[arrayidproducts[j]].name +
+        "</td><td class='precio'>" + products[arrayidproducts[j]].price +
+        "</td><td class='cantidad'>" + arrayidquantity[j] +
+        "</td></tr>"
+    );
+    aux.push({
+        "product_id": products[arrayidproducts[j]].id,
+        "nombre": products[arrayidproducts[j]].name,
+        "precio": products[arrayidproducts[j]].price,
+        "cantidad": arrayidquantity[j],
+        "orderfood_id": orderfood.id
+    });
+    total = total + (products[arrayidproducts[j]].price * arrayidquantity[j]);
+}
+
+$('#total').text(total);
+comanda = orderfood.id;
+res = aux;
+console.log(comanda);
+console.log(res);
+console.log(
+    total);
 </script>
 
 <style>

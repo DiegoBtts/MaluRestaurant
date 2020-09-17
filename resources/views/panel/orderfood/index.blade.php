@@ -74,6 +74,8 @@
                                             class="fa fa-eye"></i></a>
                                     <button id="delete" orderfoodId="{{$value->id}}" class="btn btn-danger"><i
                                             class="fa fa-times"></i></button>
+                                    <a href="{{route('sell.sale',$value->id)}}" class="btn btn-success"><i
+                                            class="fa fa-cash-register"></i></a>
                                 </div>
                             </td>
                         </tr>

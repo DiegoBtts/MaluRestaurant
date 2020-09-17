@@ -85,6 +85,10 @@ Route::group(['middleware' => 'auth' ], function()
         'uses' => 'Panel\SellController@index',
         'as'=> 'sell'
     ]);
+    Route::get('/sell/{id}/sale', [
+        'uses' => 'Panel\SellController@sale',
+        'as'=> 'sell.sale'
+    ]);
     Route::post('/sell/search', [
         'uses' => 'Panel\SellController@search',
         'as'=> 'sell.search'
