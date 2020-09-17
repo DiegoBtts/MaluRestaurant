@@ -158,6 +158,5 @@ class SellController extends Controller
             la conexión con la impresora. Recuerda incluir esto al final de todos los archivos
         */
         $printer->close();
-        return redirect()->route('sell');
     }
 }
