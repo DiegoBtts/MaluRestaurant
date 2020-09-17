@@ -17,7 +17,7 @@
                         <div class="col-md-12">
 
                             <h1>Ventas</h1>
-
+                            <input type="button" value="imprimir" id="btnImprimir">
                         </div>
 
                         <div class="col-md-12">
@@ -375,6 +375,7 @@
     </div>
 
 </div>
+
 
 <script type="text/javascript">
 var total = 0;

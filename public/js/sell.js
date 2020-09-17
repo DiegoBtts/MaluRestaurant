@@ -8,7 +8,21 @@ $('#action').click(function(){
     }
     
 });
-
+$(document).ready(function () {
+    $("#btnImprimir").click(function () {
+        $.ajax({
+            url: "/sell/Ticket",
+            type: "GET",
+            success: function (response) {
+                if (response == 1) {
+                    alert("Imprimiendo....");
+                } else {
+                    alert("Error");
+                }
+            },
+        });
+    });
+});
 $(document).ready(function() {
     $('#formsell').submit(function(event) {
         var total = $('#totalSales').val();  
@@ -31,6 +45,8 @@ $(document).ready(function() {
         } else {
             return false;
         }
+
+         
     });
 
     $("#domicilioList").hide("fast");

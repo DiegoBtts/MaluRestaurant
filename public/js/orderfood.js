@@ -22,6 +22,7 @@ $(document).ready(function () {
         responsive: true,
         searching: false,
     });
+
 });
 
 function checkAll(bx) {
