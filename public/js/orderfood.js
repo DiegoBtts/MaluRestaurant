@@ -19,7 +19,7 @@ $(document).ready(function () {
             [5, 10, 25, "All"],
         ],
         iDisplayLength: 5,
-        responsive: true,
+        
         searching: false,
     });
 

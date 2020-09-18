@@ -99,9 +99,9 @@ Route::group(['middleware' => 'auth' ], function()
         'as'=> 'sell.save'
     ]);
 
-    Route::get('/sell/Ticket', [
+    Route::post('/sell/Ticket', [
         'uses' => 'Panel\SellController@Ticket',
-        'as'=> 'sell/Ticket'
+        'as'=> 'sell.Ticket'
     ]);
 
     /* SalesHistory*/
@@ -144,6 +144,10 @@ Route::group(['middleware' => 'auth' ], function()
     Route::post('/orderfood/save/{orderfood?}', [
         'uses' => 'Panel\OrderFoodController@save',
         'as'=> 'orderfood.save'
+    ]);
+    Route::post('/orderfood/ticket', [
+        'uses' => 'Panel\OrderFoodController@ticketComanda',
+        'as'=> 'orderfood.ticket'
     ]);
 
     Route::get('/orderfood/{id}/edit', [
