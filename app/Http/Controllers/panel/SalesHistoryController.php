@@ -10,40 +10,19 @@ use App\models\TestTypeModel;
 use App\models\SaleModel;
 use App\models\ClientModel;
 use App\Helpers\Helper;
+use Carbon\Carbon;
 
 class SalesHistoryController extends Controller
 {
     public function index()
 	{
+        $total =0;
+        $date = strftime("%Y-%m-%d");
         $sales = SaleModel::all();
+        foreach($sales as $s){
+          $total =$total +$s->total;  
+        }
         
-		return view('panel.saleshistory.index', ['items' => $sales]);
+		return view('panel.saleshistory.index', ['items' => $sales,'total'=>$total,'fecha'=>$date]);
 	}
-    
-    public function delete($id)
-    {
-        if(\Auth::user()->role == "admin"){
-            SaleModel::destroy($id);
-            session()->flash('messages', 'success|La venta se borro satisfactoriamente.' );
-            return redirect()->route('saleshistory');
-        }else{
-            session()->flash('messages', 'danger|Accion denegada para este tipo de usuario.' );
-            return redirect()->route('saleshistory');
-        }
-    }
-
-    public function showAppointment($id)
-    {
-        $sale =SaleModel::find($id);
-        $appointment_list = json_decode($sale->list_appointment,true);
-        $array = [];
-        foreach ($appointment_list as $key => $value) 
-        {
-            $appointment = AppointmentModel::find($value["id"]);
-            $group = GroupsModel::find($appointment->exam_id);
-            $client = ClientModel::find($appointment->client_id);
-            array_push($array, array(["codigo"=>$appointment->appointment_code, "client" => $client->name, "price"=>$group->price]));
-        }
-        return response()->json($array);
-    }
 }

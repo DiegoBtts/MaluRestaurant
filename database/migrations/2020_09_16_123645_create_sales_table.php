@@ -13,6 +13,7 @@ class CreateSalesTable extends Migration
             $table->bigIncrements('id');
             $table->string("total",50);
             $table->string("payment_method",50);
+            $table->json("details");
             $table->bigInteger("orderfood")->unsigned();
             $table->foreign("orderfood")->references("id")->on("orderfood")->onDelete("cascade");
             $table->timestamps();

@@ -35,6 +35,7 @@ class SellController extends Controller
         $sale = new SaleModel();
         $sale->total = $request->total;
         $sale->payment_method = $request->options;
+        $sale->details=json_encode($request->res);
         $sale->orderfood = $request->comanda;
         $sale->save();
         

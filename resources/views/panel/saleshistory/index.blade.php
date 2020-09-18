@@ -15,6 +15,17 @@
                     <h1>Historial de Ventas</h1>
 
                 </div>
+                <div class="col-sm-6">
+
+                    <ol class="breadcrumb float-sm-right">
+
+                        <button class="btn btn-block btn-success" saleId="#" data-toggle="modal"
+                            data-target="#modalDetails"><i class="fa fa-cash-register mr-1"></i>Corte fin dia
+                            </buttton>
+
+                    </ol>
+
+                </div>
 
             </div>
 
@@ -34,11 +45,11 @@
 
                         <tr>
                             <th style="width: 10px">#</th>
-                            <th>metodo de pago</th>
-                            <th>lista de cita</th>
-                            <th>total</th>
-                            <th>fecha</th>
-                            <th>Acciones</th>
+                            <th>Metodo de pago</th>
+                            <th>Total</th>
+                            <th>Fecha</th>
+                            <th>Detalles de venta</th>
+
                         </tr>
 
                     </thead>
@@ -49,21 +60,61 @@
                         <tr>
                             <td>{{(count($items)-($key+1)+1)}}</td>
                             <td>{{$value->payment_method}}</td>
-                            <td>
-                                <button class="btn btn-success details" saleId="{{$value->id}}" data-toggle="modal"
-                                    data-target="#modalDetails">Más detalles</button>
-                            </td>
                             <td>{{$value->total}}</td>
                             <td>{{$value->created_at->format("d/m/Y")}}</td>
-
                             <td>
-                                <div class="btn-group">
-                                    <button saleId="{{$value->id}}" class="btn btn-primary print"><i
-                                            class="fa fa-barcode"></i></button>
-                                    <button id="delete" SalesHistoryId="{{$value->id}}" class="btn btn-danger"><i
-                                            class="fa fa-times"></i></button>
+                                <button type="button" id="details" value="{{$value->id}}" class="btn btn-warning"
+                                    data-toggle="modal" data-target="#detailsVenta{{$value->id}}">Detalles</button>
+                                <!-- Modal details -->
+                                <div class="modal fade" id="detailsVenta{{$value->id}}" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title text-center" id="exampleModalLongTitle">Detalles
+                                                    suscriptor
+                                                </h4>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <table class="table table-bordered table-hover tableSales"
+                                                    id="kt_table_1">
+                                                    <thead>
+                                                        <th>Codigo</th>
+                                                        <th>Descripcion</th>
+                                                        <th>Precio</th>
+                                                        <th>Cantidad</th>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach(json_decode($value->details) as $key => $details)
+                                                        <tr>
+                                                            <td>{{$details->product_id}}</td>
+                                                            <td>{{$details->nombre}}</td>
+                                                            <td>{{$details->precio}}</td>
+                                                            <td>{{$details->cantidad}}</td>
+                                                        </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+
+                                                <!-- Errores de validaciones -->
+                                                <div class="alert alert-outline-danger print-error-msg"
+                                                    style="display:none">
+                                                    <ul class="mb-0"></ul>
+                                                </div>
+                                                <!-- Fin validaciones -->
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Cerrar</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </td>
+
                         </tr>
                         @endforeach
 
@@ -78,16 +129,15 @@
     </section>
 
 </div>
-
 <div class="modal fade" id="modalDetails">
 
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-md">
 
         <div class="modal-content">
 
             <div class="modal-header">
 
-                <h4 class="modal-title">Detalles de cita</h4>
+                <h4 class="modal-title text-center">Corte fin dia</h4>
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -104,19 +154,14 @@
                     <div class="col-md-12">
 
                         <table class="table tableDetails">
-
-                            <thead>
-                                <tr>
-                                    <th>Código</th>
-                                    <th>Cliente</th>
-                                    <th>Precio</th>
-                                </tr>
-                            </thead>
-
-                            <tbody id="content_table_details">
-
-                            </tbody>
-
+                            <tr>
+                                <th>Total</th>
+                                <td>{{$total}}</td>
+                            </tr>
+                            <tr>
+                                <th>Fecha</th>
+                                <td>{{$fecha}}</td>
+                            </tr>
                         </table>
                     </div>
 
@@ -126,7 +171,10 @@
 
             <div class="modal-footer justify-content-between">
 
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-danger " data-dismiss="modal"><i
+                        class="fa fa-times mr-1"></i>Cerrar</button>
+                <button type="button" class="btn btn-info " data-dismiss="modal"><i
+                        class="fa fa-print mr-1"></i>Imprimir</button>
 
             </div>
 
@@ -136,7 +184,10 @@
 
 </div>
 
+
 <script src="{{ asset('js/saleshistory.js')}}"></script>
-<script src="{{asset('js/dataTables.responsive.min.js')}}"></script>
-<script src="{{asset('js/datatables.min.js')}}"></script>
+<script src="{{asset('js/dataTables.responsive.min.js')}}">
+</script>
+<script src="{{asset('js/datatables.min.js')}}">
+</script>
 @stop
