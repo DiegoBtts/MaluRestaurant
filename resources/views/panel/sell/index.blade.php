@@ -17,7 +17,7 @@
                         <div class="col-md-12">
 
                             <h1>Ventas</h1>
-                            <input type="button" value="imprimir" id="btnImprimir">
+
                         </div>
 
                         <div class="col-md-12">
@@ -521,7 +521,7 @@ $('#sale').on('click', function(e) {
         metodo = "Tarjeta";
     }
     console.log(res);
-    if ($('#payment').val() >= $('#totalSales').val()) {
+    if ($('#payment').val() >= parseInt(total)) {
 
         $('#sale').attr('data-dismiss', 'modal');
         $.ajax({
@@ -536,7 +536,8 @@ $('#sale').on('click', function(e) {
                 pago: $('#payment').val()
             }
         }).done(function(respuesta) {
-
+            $("#payment").val("");
+            $("#error").text(" ");
             $("#content_table_sell td").remove();
             $('#total_table').text(respuesta[0].total);
             $('#payment_table').text(respuesta[0].pago);
@@ -545,6 +546,8 @@ $('#sale').on('click', function(e) {
 
             $('#search').removeAttr("disabled");
             $('#find').attr('data-toggle', 'modal');
+            $("#totalSales").val("");
+            $("#comanda").val("");
             swal("!Good job!", "Venta finalizada", "success");
 
         });
@@ -710,6 +713,30 @@ console.log(
 }
 </style>
 <script src="{{ asset('js/sell.js')}}"></script>
+<script>
+$(document).ready(function() {
+    $("#sale").click(function() {
+        console.log($('#payment').val());
+        console.log($('.totalLetter').text().replace('$', ''));
+        if ($('#payment').val() >= parseInt(total)) {
 
+
+            $.ajax({
+                url: "{{route('sell.Ticket')}}",
+                data: {
+                    _token: "{!! csrf_token() !!}",
+                    res: res,
+                    pago: $('#payment').val(),
+                },
+                method: "POST",
+                success: function(response) {
+                    console.log(response)
+                },
+            });
+
+        }
+    });
+});
+</script>
 
 @stop
