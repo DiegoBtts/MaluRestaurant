@@ -13,4 +13,7 @@ class SaleModel extends Model
     	'total',
     	'payment_method'
     ];
+
+
+
 }

@@ -12,7 +12,7 @@
 
                 <div class="col-sm-6">
 
-                    <h1>Menu</h1>
+                    <h1>Facturacion</h1>
 
                 </div>
 

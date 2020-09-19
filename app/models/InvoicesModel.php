@@ -20,8 +20,5 @@ class InvoicesModel extends Model
     	
     ];
     
-    public function orderfood() {
-    return $this->belongsToMany(OrderfoodModel::class);
-
-    }
+   
 }

@@ -23,8 +23,9 @@ class CreateInvoicesTable extends Migration
             $table->string("CP",50);
             $table->string("phone",50);
             $table->string("email",50);
-            $table->bigInteger("sales")->unsigned();
-            $table->foreign("sales")->references("id")->on("sales")->onDelete("cascade");
+            $table->string("sales",50);
+           
+            
             
             
             $table->timestamps();

@@ -50,7 +50,7 @@ class InvoicesController extends Controller
         $invoices->address = $request->input('address');
         $invoices->CP = $request->input('CP');
         $invoices->phone = $request->input('phone');
-        $invoices->sales=$request->sales;
+        $invoices->sales= SaleModel::find($request->sales)->total;
         $invoices->email = $request->input('email');
         
         $invoices->save();
