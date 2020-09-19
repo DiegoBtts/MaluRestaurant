@@ -3,6 +3,7 @@ $("#action").click(function () {
         $("#action").attr("data-toggle", "modal");
         $("#totalSales").val(total);
         $("#comanda").val(comanda);
+        console.log("entro al if");
     } else {
         swal.fire("¡Cuidado!", "No se ha iniciado una venta.", "warning");
     }
