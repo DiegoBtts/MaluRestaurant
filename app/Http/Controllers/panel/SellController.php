@@ -47,19 +47,14 @@ class SellController extends Controller
 	//este fue el nuevo metodo que implemente
     public function search(Request $request) 
     {
-        $productsList=array();
-        $quantityList=array();
+        
         $res=array();
         $results = OrderFoodModel::whereIdAndStatus($request->id,0)->get();
-        for($i = 0; $i<strlen ( $results[0]->products);$i++){
-            if($results[0]->products[$i]!='"' &&$results[0]->products[$i]!='['&& $results[0]->products[$i]!=']' && $results[0]->products[$i]!=','){
-              array_push($productsList,$results[0]->products[$i]);   
-            }  
-        }
-        for($i = 0; $i<strlen ( $results[0]->quantity);$i++){
-            if($results[0]->quantity[$i]!='"' &&$results[0]->quantity[$i]!='['&& $results[0]->quantity[$i]!=']' && $results[0]->quantity[$i]!=','){
-              array_push($quantityList,$results[0]->quantity[$i]);   
-            }  
+        $productsList=json_decode($results[0]->products);
+        $quantityList=json_decode($results[0]->quantity);
+        for($i=0; $i<sizeof($quantityList); $i++){
+            $quantityList[$i] = str_replace("\"","",$quantityList[$i]);
+            
         }
         for($j = 0; $j<sizeof($productsList);$j++){
             $product = ProductsModel::find($productsList[$j]);
