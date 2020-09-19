@@ -58,15 +58,17 @@ class OrderFoodController extends Controller
         $orderfood->status = 0;
         $orderfood->products =json_encode($request->input('products'));
         $orderfood->quantity =json_encode(array_values(array_filter($request->input('quantity'))));
-        
+        $names = $orderfood;
         $orderfood->save();
         
+        
         session()->flash('messages', 'success|Comanda registrada correctamente.' );
+        $this->ticketComanda($names);
         return redirect()->route('orderfood');
     }
 
     
-    public function ticketComanda(Request $request){
+    public function ticketComanda($names){
         
         $nombre_impresora = "POS"; 
 
@@ -74,7 +76,15 @@ class OrderFoodController extends Controller
 $connector = new WindowsPrintConnector($nombre_impresora);
 $printer = new Printer($connector);
 #Mando un numero de respuesta para saber que se conecto correctamente.
+
+$res=array();
+ $productsList=json_decode($names->products);
+ $quantityList=json_decode($names->quantity);
+        
+        
+        
 echo 1;
+//echo $names->ordertype;
 /*
 	Vamos a imprimir un logotipo
 	opcional. Recuerda que esto
@@ -100,6 +110,8 @@ $printer->setJustification(Printer::JUSTIFY_CENTER);
 */
 $printer->setTextSize(2,2);
 $printer->text("\n"."Restaurante Malu" . "\n");
+$printer->setTextSize(1,2);
+$printer->text("\n"."Comanda" . "\n");
 $printer->setTextSize(1,1);
 $printer->text("Direccion: Calle 11 Av J." . "\n");
 $printer->text("Tel: 6343460278" . "\n");
@@ -107,8 +119,20 @@ $printer->text("Tel: 6343460278" . "\n");
 date_default_timezone_set("America/Hermosillo");
 $printer->text(date("Y-m-d H:i:s") . "\n");
 $printer->text("-----------------------------" . "\n");
+
+
+if($names->ordertype=="restaurante"){
+    echo "Entro a restaurante";
+    $printer->text("Tipo de Orden: " . $names->ordertype."\n");
+    $printer->text("Mesa #: " . $names->tablenumber."\n");
+}else if($names->ordertype=="Domicilio"){
+    $printer->text("Tipo de Orden: " . $names->ordertype."\n");
+    $printer->text("Nombre: " . $names->name." " .$names->last_name."\n");
+    $printer->text("Telefono: " . $names->phone."\n");
+    $printer->text("Domicilio: " . $names->address."\n");
+}
 $printer->setJustification(Printer::JUSTIFY_LEFT);
-$printer->text("CANT  DESCRIPCION    P.U   IMP.\n");
+$printer->text("CANT  DESCRIPCION      .\n");
 $printer->text("-----------------------------"."\n");
 /*
 	Ahora vamos a imprimir los
@@ -116,32 +140,33 @@ $printer->text("-----------------------------"."\n");
 */
 	/*Alinear a la izquierda para la cantidad y el nombre*/
     $printer->setJustification(Printer::JUSTIFY_LEFT);
+    $printer->setTextSize(1,2);
     $printer->text("Productos:\n");
     $total=0;
-    for ($i = 0; $i < sizeOf($request['res']) ; $i++) {
-        $printer->text($request['res'][$i]['nombre'] ."\n");
-        $printer->text($request['res'][$i]['cantidad'] ."  piezas". "           $".$request['res'][$i]['precio']);
-        $printer->text( ("   $".($request['res'][$i]['precio'])*$request['res'][$i]['cantidad'])."\n");
-        $total = $total + ($request['res'][$i]['precio'])*($request['res'][$i]['cantidad']);
-}
-       //var_dump($request['res'][0]['precio']);
 
+    for($i=0; $i<sizeof($productsList); $i++){
+        
+        
+            echo $productsList[$i];
+            $arreglo = ProductsModel::whereId($productsList[$i])->get();
+            $printer->text($quantityList[$i] ."  ");
+            $printer->text($arreglo[0]->name ."\n");
+            printf($arreglo[0]->name);
+            
+        }
+    $printer->setTextSize(1,1);
 /*
 	Terminamos de imprimir
 	los productos, ahora va el total
 */
 $printer->text("-----------------------------"."\n");
-$printer->setJustification(Printer::JUSTIFY_RIGHT);
-$printer->text("SUBTOTAL: $709.00\n");
-$printer->text("IVA: $16.00\n");
-$printer->text("TOTAL: $".$total.".00\n");
+;
 
 
 /*
 	Podemos poner también un pie de página
 */
-$printer->setJustification(Printer::JUSTIFY_CENTER);
-$printer->text("Muchas gracias por su compra\n");
+
 
 
 
@@ -167,7 +192,5 @@ $printer->pulse();
 	la conexión con la impresora. Recuerda incluir esto al final de todos los archivos
 */
 $printer->close();
-
-        
     }
 }
