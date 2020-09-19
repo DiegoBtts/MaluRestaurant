@@ -1,12 +1,13 @@
 <?php
 
 namespace Tests\Feature;
-
+use App\models\UserModel;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
+     use RefreshDatabase;
     /**
      * A basic test example.
      *
@@ -14,8 +15,10 @@ class ExampleTest extends TestCase
      */
     public function testBasicTest()
     {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
+           $user = factory(UserModel::class)->save([
+            'username'    => 'demo',
+            'name'      =>'demo',
+            'password' => bcrypt('demo'),
+        ]);
     }
 }
