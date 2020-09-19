@@ -410,6 +410,10 @@ $('#search').on('keyup', function(e) {
     if (e.keyCode == 13) {
         if ($("#content_table_sell td").length == 0) {
             console.log("entro al search");
+            $('#total_table').text("");
+            $('#payment_table').text("");
+            $('#change_table').text("");
+
             $.ajax({
                 method: "POST",
                 url: "{{route('sell.search')}}",
@@ -461,6 +465,9 @@ $('#search2').click(function(e) {
     if ($('#search').val() != 0) {
         if ($("#content_table_sell td").length == 0) {
             console.log("entro al search");
+            $('#total_table').text("");
+            $('#payment_table').text("");
+            $('#change_table').text("");
             $.ajax({
                 method: "POST",
                 url: "{{route('sell.search')}}",
@@ -548,7 +555,10 @@ $('#sale').on('click', function(e) {
             $('#find').attr('data-toggle', 'modal');
             $("#totalSales").val("");
             $("#comanda").val("");
-            swal("!Good job!", "Venta finalizada", "success");
+            $('#action').removeAttr("data-toggle");
+            res = 0;
+            comanda = 0;
+            swal.fire("!Good job!", "Venta finalizada", "success");
 
         });
     } else {
@@ -563,6 +573,9 @@ $('#busquedaD tbody tr').click(function() {
         $('#code_search').modal('hide');
         var id = $(this).find("td:first-child").text();
         console.log(id);
+        $('#total_table').text("");
+        $('#payment_table').text("");
+        $('#change_table').text("");
         $.ajax({
             method: "POST",
             url: "{{route('sell.search')}}",
@@ -614,6 +627,9 @@ $('#busquedaR tbody tr').click(function() {
         $('#code_search').modal('hide');
         var id = $(this).find("td:first-child").text();
         console.log(id);
+        $('#total_table').text("");
+        $('#payment_table').text("");
+        $('#change_table').text("");
         $.ajax({
             method: "POST",
             url: "{{route('sell.search')}}",

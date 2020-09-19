@@ -18,11 +18,12 @@ class SalesHistoryController extends Controller
 	{
         $total =0;
         $date = strftime("%Y-%m-%d");
-        $sales = SaleModel::all();
+        $sales = SaleModel::where('created_at','like','%'.$date.'%')->get();
         foreach($sales as $s){
           $total =$total +$s->total;  
         }
         
-		return view('panel.saleshistory.index', ['items' => $sales,'total'=>$total,'fecha'=>$date]);
+    return view('panel.saleshistory.index', ['items' => $sales,'total'=>$total,'fecha'=>$date]);
+    
 	}
 }
