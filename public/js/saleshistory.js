@@ -68,3 +68,6 @@ $(".tableSales tbody").on("click", "button.details", function () {
         },
     });
 });
+
+
+

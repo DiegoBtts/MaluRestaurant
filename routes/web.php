@@ -119,6 +119,12 @@ Route::group(['middleware' => 'auth' ], function()
         'uses' => 'Panel\SalesHistoryController@save',
         'as'=> 'saleshistory.save'
     ]);
+
+    Route::post('/saleshistory/ticket', [
+        'uses' => 'Panel\SalesHistoryController@ticket',
+        'as'=> 'saleshistory.ticket'
+    ]);
+    
     Route::get('/saleshistory/{id}/delete', [
         'uses' => 'Panel\SalesHistoryController@delete',
         'as'=> 'saleshistory.delete'

@@ -156,7 +156,7 @@
                         <table class="table tableDetails">
                             <tr>
                                 <th>Total</th>
-                                <td>{{$total}}</td>
+                                <td id="total">{{$total}}</td>
                             </tr>
                             <tr>
                                 <th>Fecha</th>
@@ -173,7 +173,7 @@
 
                 <button type="button" class="btn btn-danger " data-dismiss="modal"><i
                         class="fa fa-times mr-1"></i>Cerrar</button>
-                <button type="button" class="btn btn-info " data-dismiss="modal"><i
+                <button type="button" id="btnimprimir" class="btn btn-info " data-dismiss="modal"><i
                         class="fa fa-print mr-1"></i>Imprimir</button>
 
             </div>
@@ -189,5 +189,24 @@
 <script src="{{asset('js/dataTables.responsive.min.js')}}">
 </script>
 <script src="{{asset('js/datatables.min.js')}}">
+</script>
+<script>
+$(document).ready(function() {
+    $("#btnimprimir").click(function() {
+
+        $.ajax({
+            url: "{{route('saleshistory.ticket')}}",
+            data: {
+                _token: "{!! csrf_token() !!}",
+                total: $("#total").text(),
+            },
+            method: "POST",
+            success: function(response) {
+                console.log(response);
+            },
+        });
+
+    });
+});
 </script>
 @stop
