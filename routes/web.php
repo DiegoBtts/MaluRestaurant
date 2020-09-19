@@ -48,16 +48,6 @@ Route::group(['middleware' => 'auth' ], function()
         'as'=> 'product'
     ]);
 
-    Route::put('/product/addStock/{id}', [
-        'uses' => 'Panel\ProductsController@addStock',
-        'as'=> 'product.addStock'
-    ]);
-
-    Route::post('/product/saveStock', [
-        'uses' => 'Panel\ProductsController@saveStock',
-        'as'=> 'product.saveStock'
-    ]);
-
     Route::get('/product/add', [
         'uses' => 'Panel\ProductsController@add',
         'as'=> 'product.add'
@@ -165,7 +155,31 @@ Route::group(['middleware' => 'auth' ], function()
         'uses' => 'Panel\OrderFoodController@delete',
         'as'=> 'orderfood.delete'
     ]);
+  /* Invoices */
+  Route::get('/invoices', [
+    'uses' => 'Panel\InvoicesController@index',
+    'as'=> 'invoices'
+]);
 
+Route::get('/invoices/add', [
+    'uses' => 'Panel\InvoicesController@add',
+    'as'=> 'invoices.add'
+]);
+
+Route::post('/invoices/save/{invoices?}', [
+    'uses' => 'Panel\InvoicesController@save',
+    'as'=> 'invoices.save'
+]);
+
+Route::get('/invoices/{id}/edit', [
+    'uses' => 'Panel\InvoicesController@edit',
+    'as'=> 'invoices.edit'
+]);
+
+Route::get('/invoices/{id}/delete', [
+    'uses' => 'Panel\InvoicesController@delete',
+    'as'=> 'invoices.delete'
+]);
     
 
     // Esta ruta nos servirá para cerrar sesión.
