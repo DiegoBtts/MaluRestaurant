@@ -1,12 +1,19 @@
 $(document).ready(function () {
     // $(".mdb-select").materialSelect();
-    CheckValuesOrder("Restaurante");
+    if($("#titulo").text()=="Nuevo Comanda"){
+    CheckValuesOrder("restaurante");
+    }
     ActualDate();
-    $("#restaurant").prop("checked", true);
+    
 });
 
 $(document).ready(function () {
     $("#ok").DataTable({
+        aLengthMenu: [
+            [5, 10, 25, -1],
+            [5, 10, 25, "All"],
+        ],
+        iDisplayLength: 25,
         responsive: true,
         searching: false,
     });
@@ -14,13 +21,8 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     $("#example").DataTable({
-        aLengthMenu: [
-            [5, 10, 25, -1],
-            [5, 10, 25, "All"],
-        ],
-        iDisplayLength: 5,
-        responsive: true,
-        searching: false,
+        iDisplayLength: 200,
+        searching: true,
     });
 });
 
@@ -56,9 +58,11 @@ function check(value) {
 }
 
 function CheckValuesOrder(value) {
-    console.log(value);
+    
     if (value == "Domicilio") {
+        console.log("Entro acacacaca en domi");
         console.log("entro a domicilio");
+        $("#order").prop("checked", true);
         $("#tablenumber").hide("fast");
         $("#daddress").show("fast");
         $("#dphone").show("fast");
@@ -69,7 +73,9 @@ function CheckValuesOrder(value) {
         $("#dname").attr("required", true);
         $("#dlast_name").attr("required", true);
         $(".options").attr("required", false);
-    } else if (value == "Restaurante") {
+    } else if (value == "restaurante") {
+        console.log("Entro acacacaca en rest");
+         $("#restaurant").prop("checked", true);
         $("#tablenumber").show("fast");
         $("#daddress").hide("fast");
         $("#dphone").hide("fast");
@@ -81,7 +87,8 @@ function CheckValuesOrder(value) {
         $("#dlast_name").attr("required", false);
         $(".options").attr("required", true);
     }
-}
+    
+    }
 
 function CheckValuesRes() {}
 
@@ -131,4 +138,7 @@ function btnTables(value, id) {
     $("#some-content").hover(function () {
         $("#radonly" + id).css("background-color", "blue");
     });
+}
+function checkTables(value) {
+    $(value).prop("checked", true);
 }

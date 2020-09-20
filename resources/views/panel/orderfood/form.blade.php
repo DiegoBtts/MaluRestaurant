@@ -54,12 +54,13 @@
 
                                 <div class="input-group-btn" data-toggle="buttons" id="Options">
 
-                                    <label for="">Tipo de comanda</label> <br>
-                                    <label class="btn btn-primary active" onclick="CheckValuesOrder('Restaurante')">
+                                    <label for="">Tipo de comanda {{$orderfood->ordertype}}</label> <br>
+                                    <label class="btn btn-primary" onclick="CheckValuesOrder('restaurante')">
                                         <i class="fas fa-utensils fa-5x"></i>
                                         <br>
+                                        @if($orderfood->ordertype == "restaurante")
                                         <input type="radio" name="ordertype" id="restaurant" autocomplete="off"
-                                            value="restaurante" onclick="CheckValuesOrder('Restaurante')">
+                                            value="restaurante" onclick="CheckValuesOrder('restaurante')">
                                         Restaurante
                                     </label>
 
@@ -70,6 +71,20 @@
                                             value="Domicilio" onclick="CheckValuesOrder('Domicilio')">
                                         Domicilio
                                     </label>
+                                    @else
+                                    <input type="radio" name="ordertype" id="restaurant" autocomplete="off"
+                                        value="restaurante" onclick="CheckValuesOrder('restaurante')">
+                                    Restaurante
+                                    </label>
+
+                                    <label class="btn btn-primary" onclick="CheckValuesOrder('Domicilio')">
+                                        <i class="fas fa-map-marker-alt fa-5x"></i>
+                                        <br>
+                                        <input type="radio" name="ordertype" id="order" autocomplete="off"
+                                            value="Domicilio" onclick="CheckValuesOrder('Domicilio')">
+                                        Domicilio
+                                    </label>
+                                    @endif
 
 
 
@@ -89,25 +104,20 @@
                                 <div class="input-group-btn mx-auto" data-toggle="buttons" id="tablenumber">
                                     <label for="">Numero de mesas</label> <br>
                                     @for($i = 1; $i <= 8; $i++) @if($orderfood->tablenumber == $i)<label
-                                            class="btn active radondy" onclick="btnTables(option{{ $i }})">
+                                            class="btn active radondy">
 
-                                            <img src="{{ asset('img/plantilla/mesa.png') }}" alt=""
-                                                onclick="btnTables('option{{ $i }}',{{ $i }})" srcset="">
+                                            <img src="{{ asset('img/plantilla/mesa.png') }}" alt="" srcset="">
                                             <br>
                                             <input type="radio" name="tablenumber" id="option{{ $i }}" class="options"
-                                                onclick="btnTables('option{{ $i }}',{{ $i }})" autocomplete="off"
-                                                value="{{ $i }}">
+                                                autocomplete="off" value="{{ $i }}">
                                             #{{ $i }}
                                         </label>
                                         @else
-                                        <label class="btn active radondy" onclick="btnTables('option{{ $i }}',{{ $i }})"
-                                            id="radonly{{ $i }}">
+                                        <label class="btn radondy" id="radonly{{ $i }}">
 
-                                            <img src="{{ asset('img/plantilla/mesa.png') }}" alt=""
-                                                onclick="btnTables('option{{ $i }}',{{ $i }})" srcset="">
+                                            <img src="{{ asset('img/plantilla/mesa.png') }}" alt="" srcset="">
                                             <br>
-                                            <input type="radio" name="tablenumber" id="option{{ $i }}"
-                                                onclick="btnTables('option{{ $i }}',{{ $i }})" class="options"
+                                            <input type="radio" name="tablenumber" id="option{{ $i }}" class="options "
                                                 autocomplete="off" value="{{ $i }}">
                                             #{{ $i }}
                                         </label>
@@ -262,9 +272,17 @@
                                         </td>
                                         <td>{{$key+1}}</td>
                                         <td>{{$value->name}}</td>
-                                        <td><input type="number" name="quantity[]" id="{{$value->id}}"
-                                                onclick="addcheck({{$value->id}})" onblur="validateCbox({{$value->id}})"
-                                                class="dataT"></td>
+                                        <td>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <input type="number" name="quantity[]" id="{{$value->id}}"
+                                                        onclick="addcheck({{$value->id}})"
+                                                        onblur="validateCbox({{$value->id}})"
+                                                        class="form-control dataT">
+
+                                                </div>
+                                            </div>
+                                        </td>
 
                                     </tr>
                                     @endforeach
@@ -307,6 +325,11 @@
     </section>
 
 </div>
+
+<script>
+checkTables("#option" + '{{$orderfood->tablenumber}}');
+CheckValuesOrder('{{$orderfood->ordertype}}');
+</script>
 <script src="{{asset('js/dataTables.responsive.min.js')}}"></script>
 <script src="{{asset('js/datatables.min.js')}}"></script>
 <script>
@@ -334,7 +357,7 @@ for (var i = 0; i < cbs.length; i++) {
         console.log("es un checkbox");
         for (var j = 0; j < arrayidproducts.length; j++) {
             if (cbs[i].value == arrayidproducts[j]) {
-                console.log("es un producto seleccionado");
+                console.log("es un producto seleccionado\n");
                 cbs[i].checked = true;
                 document.getElementById(arrayidproducts[j]).required = true;
                 document.getElementById(arrayidproducts[j]).value = arrayidquantity[j];
@@ -343,14 +366,9 @@ for (var i = 0; i < cbs.length; i++) {
         }
     }
 }
-if (orderfood.ordertype == document.getElementById("order").value) {
-    document.getElementById("order").checked = true
-
-} else {
-    document.getElementById("restaurant").checked = true;
-}
 </script>
 
-<!-- extension responsive -->
 
+<!-- extension responsive 
+-->
 @stop
