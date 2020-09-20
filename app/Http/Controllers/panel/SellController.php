@@ -17,12 +17,20 @@ class SellController extends Controller
 {
     public function index()
 	{     
-		return view('panel.sell.index')->with(['orderfood' => new OrderFoodModel(),'products' =>ProductsModel::all()]);
+		return view('panel.sell.index')->with(['res' => 0]);
 	}
     public function sale($id)
     {
         $products = ProductsModel::all();
-        return view('panel.sell.index')->with(['orderfood' => OrderFoodModel::find($id),'products' =>$products]);
+        $orderfood =OrderFoodModel::find($id);
+        $productsList =json_decode($orderfood->products);
+        $quantityList=json_decode($orderfood->quantity);
+        $res = array();
+        for($j = 0; $j<sizeof($productsList);$j++){
+            $product = ProductsModel::find($productsList[$j]);
+            array_push($res,["nombre"=>$product->name,"precio"=>$product->price,"cantidad"=>$quantityList[$j],"product_id"=>$product->id,"orderfood_id"=>$orderfood->id]);
+        }
+        return view('panel.sell.index')->with(['res' => $res]);
     }
     public function save(Request $request) 
     {

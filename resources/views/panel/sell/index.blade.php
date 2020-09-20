@@ -402,9 +402,7 @@
 var total = 0;
 let res = 0;
 let comanda = 0;
-$(document).ready(function() {
 
-})
 $('#search').on('keyup', function(e) {
 
     if (e.keyCode == 13) {
@@ -676,49 +674,37 @@ $('#busquedaR tbody tr').click(function() {
 
 
 });
+$(document).ready(function() {
 
+    const aux = @json($res);
+    console.log(aux);
+    if (aux.length != 0) {
+        $('#search').val("");
+        $('#search').attr("disabled", true);
+        $('#find').removeAttr("data-toggle");
 
-const orderfood = @json($orderfood);
-const products = @json($products);
-var regex = /^[0-9]$/;
-let arrayidproducts = [];
-let arrayidquantity = [];
+        comanda = aux[0].orderfood_id;
+        res = aux;
 
-for (var i = 0; i < orderfood.products.length; i++) {
+        console.log(comanda);
+        console.log(res);
 
-    if (regex.test(orderfood.products[i])) {
-
-        arrayidproducts.push(orderfood.products[i]);
-        arrayidquantity.push(orderfood.quantity[i]);
+        aux.forEach(t => {
+            $("#content_table_sell").append(
+                "<tr><td>" + t.product_id +
+                "</td><td>" + t.nombre +
+                "</td><td class='precio'>" + t.precio +
+                "</td><td class='cantidad'>" + t.cantidad +
+                "</td></tr>"
+            );
+            total = total + (t.precio * t.cantidad);
+        });
+        $('#total').text(total);
+        console.log(total);
     }
 
-}
-let aux = [];
-for (var j = 0; j < arrayidproducts.length; j++) {
-    $("#content_table_sell").append(
-        "<tr><td>" + products[arrayidproducts[j]].id +
-        "</td><td>" + products[arrayidproducts[j]].name +
-        "</td><td class='precio'>" + products[arrayidproducts[j]].price +
-        "</td><td class='cantidad'>" + arrayidquantity[j] +
-        "</td></tr>"
-    );
-    aux.push({
-        "product_id": products[arrayidproducts[j]].id,
-        "nombre": products[arrayidproducts[j]].name,
-        "precio": products[arrayidproducts[j]].price,
-        "cantidad": arrayidquantity[j],
-        "orderfood_id": orderfood.id
-    });
-    total = total + (products[arrayidproducts[j]].price * arrayidquantity[j]);
-}
 
-$('#total').text(total);
-comanda = orderfood.id;
-res = aux;
-console.log(comanda);
-console.log(res);
-console.log(
-    total);
+});
 </script>
 
 <style>
