@@ -329,44 +329,22 @@
 <script>
 checkTables("#option" + '{{$orderfood->tablenumber}}');
 CheckValuesOrder('{{$orderfood->ordertype}}');
+$(document).ready(function() {
+
+    const res = @json($res);
+    console.log(res);
+    for (var i = 0; i < res.length; i++) {
+        console.log(res[i].product_id);
+        $('#cbox' + res[i].product_id + '').attr('checked', true);
+        $('#' + res[i].product_id + '').val(res[i].cantidad);
+    }
+
+
+});
 </script>
 <script src="{{asset('js/dataTables.responsive.min.js')}}"></script>
 <script src="{{asset('js/datatables.min.js')}}"></script>
-<script>
-const orderfood = @json($orderfood);
-const products = @json($products);
-var regex = /^[0-9]$/;
-let arrayidproducts = [];
-let arrayidquantity = [];
 
-
-
-for (var i = 0; i < orderfood.products.length; i++) {
-
-    if (regex.test(orderfood.products[i])) {
-        console.log("entro al if");
-        arrayidproducts.push(orderfood.products[i]);
-        arrayidquantity.push(orderfood.quantity[i]);
-    }
-
-}
-
-var cbs = document.getElementsByTagName("input");
-for (var i = 0; i < cbs.length; i++) {
-    if (cbs[i].type == "checkbox") {
-        console.log("es un checkbox");
-        for (var j = 0; j < arrayidproducts.length; j++) {
-            if (cbs[i].value == arrayidproducts[j]) {
-                console.log("es un producto seleccionado\n");
-                cbs[i].checked = true;
-                document.getElementById(arrayidproducts[j]).required = true;
-                document.getElementById(arrayidproducts[j]).value = arrayidquantity[j];
-            }
-
-        }
-    }
-}
-</script>
 
 
 <!-- extension responsive 

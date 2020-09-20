@@ -26,13 +26,21 @@ class OrderFoodController extends Controller
 	public function add() 
 	{
         $products = ProductsModel::all();
-        return view('panel.orderfood.form')->with(['orderfood' => new OrderFoodModel(),'products' =>$products]); 
+        return view('panel.orderfood.form')->with(['orderfood' => new OrderFoodModel(),'products' =>$products,'res'=>0]); 
     }
 
     public function edit($id)
     {
         $products = ProductsModel::all();
-        return view('panel.orderfood.form')->with(['orderfood' => OrderFoodModel::find($id),'products' =>$products]);
+        $orderfood =OrderFoodModel::find($id);
+        $productsList =json_decode($orderfood->products);
+        $quantityList=json_decode($orderfood->quantity);
+        $res = array();
+        for($j = 0; $j<sizeof($productsList);$j++){
+            $product = ProductsModel::find($productsList[$j]);
+            array_push($res,["nombre"=>$product->name,"precio"=>$product->price,"cantidad"=>$quantityList[$j],"product_id"=>$product->id]);
+        }
+        return view('panel.orderfood.form')->with(['orderfood' => $orderfood,'products' =>$products,'res'=>$res]);
     }
 
 
