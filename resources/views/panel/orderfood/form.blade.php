@@ -2,7 +2,11 @@
 <link rel="stylesheet" href="{{asset('css/responsive.dataTables.min.css')}}">
 @section('content-panel')
 
+
+
 <link rel="stylesheet" href="{{ asset('css/orderfood.css')}}">
+<link rel="stylesheet" href="{{ asset('css/select2.min.css')}}">
+<script src="{{ asset('js/select2.min.js')}}"></script>
 <script src="{{ asset('js/orderfood.js')}}"></script>
 
 <div class="content-wrapper">
@@ -132,7 +136,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <label class="label-style" for="date">Fecha</label>
+                            <label class="label-style" for="date" >Fecha</label>
 
                             <div class="input-group mb-3">
 
@@ -251,6 +255,23 @@
                         <div class="col-md-12">
                             <h4>Menu:</h4>
                             <label for="">Selecciona los productos.</label>
+
+                           
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <select class="selectpicker form-control mi-selector" name='marcas'>
+                                                <option value='' disabled selected>Seleccionar un producto</option>
+                                                @foreach($products as $key => $value)
+                                                <option value="{{$value->id}},{{$value->name}},{{$key}}">{{$value->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+
                             <table id="example" class="table table-striped table-bordered" style="width:100%">
                                 <thead>
                                     <tr>
@@ -260,32 +281,13 @@
                                         <th style="width: 10px">#</th>
                                         <th>Producto</th>
                                         <th>Cantidad</th>
+                                        <th>Acciones</th>
 
                                     </tr>
                                 </thead>
                                 <tbody>
 
-                                    @foreach($products as $key => $value)
-                                    <tr>
-                                        <td><input type="checkbox" name="products[]" value="{{$value->id}}"
-                                                onclick="check({{$value->id}})" id="cbox{{$value->id}}">
-                                        </td>
-                                        <td>{{$key+1}}</td>
-                                        <td>{{$value->name}}</td>
-                                        <td>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <input type="number" name="quantity[]" id="{{$value->id}}"
-                                                        onclick="addcheck({{$value->id}})"
-                                                        onblur="validateCbox({{$value->id}})"
-                                                        class="form-control dataT">
-
-                                                </div>
-                                            </div>
-                                        </td>
-
-                                    </tr>
-                                    @endforeach
+                                    
                                 </tbody>
                             </table>
                         </div>
@@ -301,14 +303,14 @@
                             <div class="col-md-6">
 
                                 <a href="{{route('orderfood')}}" class="btn btn-block btn-danger float-left cancelar">
-                                    <i class="fa fa-fw fa-plus"></i> Cancelar
+                                    <i class="fa fa-fw fa-trash"></i> Cancelar
                                 </a>
 
                             </div>
 
                             <div class="col-md-6">
 
-                                <button type="submit" class="btn btn-block btn-success float-right">
+                                <button type="submit" class="btn btn-block btn-success float-right" id="submitComand" onclick="disable()">
                                     <i class="fa fa-fw fa-plus"></i> Guardar
                                 </button>
 

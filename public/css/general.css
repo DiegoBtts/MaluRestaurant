@@ -360,3 +360,13 @@ input[type="password"] {
 .search_list::-webkit-scrollbar-track:active {
     background: #d4d4d4;
 }
+
+.selectProducts {
+    width: 100%;
+}
+.separator {
+    height: 40px;
+}
+.mi-selector{
+    height: 200px;
+}

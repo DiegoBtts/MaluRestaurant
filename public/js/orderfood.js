@@ -1,10 +1,13 @@
 $(document).ready(function () {
     // $(".mdb-select").materialSelect();
-    if($("#titulo").text()=="Nuevo Comanda"){
-    CheckValuesOrder("restaurante");
+    if ($("#titulo").text() == "Nuevo Comanda") {
+        CheckValuesOrder("restaurante");
     }
     ActualDate();
-    
+    $(".mi-selector").select2({
+        theme: "classic",
+        placeholder: "Selecciona un producto",
+    });
 });
 
 $(document).ready(function () {
@@ -22,7 +25,14 @@ $(document).ready(function () {
 $(document).ready(function () {
     $("#example").DataTable({
         iDisplayLength: 200,
-        searching: true,
+        searching: false,
+        language: {
+            zeroRecords: " ",
+        },
+        responsive: true,
+        paging: false,
+        ordering: false,
+        info: false,
     });
 });
 
@@ -58,7 +68,6 @@ function check(value) {
 }
 
 function CheckValuesOrder(value) {
-    
     if (value == "Domicilio") {
         console.log("Entro acacacaca en domi");
         console.log("entro a domicilio");
@@ -75,7 +84,7 @@ function CheckValuesOrder(value) {
         $(".options").attr("required", false);
     } else if (value == "restaurante") {
         console.log("Entro acacacaca en rest");
-         $("#restaurant").prop("checked", true);
+        $("#restaurant").prop("checked", true);
         $("#tablenumber").show("fast");
         $("#daddress").hide("fast");
         $("#dphone").hide("fast");
@@ -87,8 +96,7 @@ function CheckValuesOrder(value) {
         $("#dlast_name").attr("required", false);
         $(".options").attr("required", true);
     }
-    
-    }
+}
 
 function CheckValuesRes() {}
 
@@ -121,16 +129,6 @@ function ActualDate() {
     $("#hour").prop("disabled", true);
 }
 
-function addcheck(value) {
-    var cbox = "cbox" + value;
-    $("#" + cbox).prop("checked", true);
-}
-function validateCbox(value) {
-    var cbox = "cbox" + value;
-    if ($("#" + value).val() == "") {
-        $("#" + cbox).prop("checked", false);
-    }
-}
 
 function btnTables(value, id) {
     $("#" + value).prop("checked", true);
@@ -141,4 +139,102 @@ function btnTables(value, id) {
 }
 function checkTables(value) {
     $(value).prop("checked", true);
+}
+
+$(document).ready(function () {
+    $("select[name=color1]").change(function () {
+        alert($("select[name=color1]").val());
+        $("input[name=valor1]").val($(this).val());
+    });
+    $("#ejemplo2").change(function () {
+        alert($("select[id=ejemplo2]").val());
+        $("#valor2").val($(this).val());
+    });
+    $(".ejemplo3").change(function () {
+        alert($("select[class=ejemplo3]").val());
+        $(".valor3").val($(this).val());
+    });
+});
+
+$(document).ready(function () {
+    var cont = 1;
+    var elementsSelect = [];
+    $("#example .dataTables_empty").remove();
+    $("#example .odd").remove();
+
+    $(".mi-selector").change(function () {
+        var value = $(".mi-selector").val();
+        var array = value.split(",");
+        var validator = false;
+
+        var htmlTags =
+            "<tr id='fila" +
+            cont +
+            "'>" +
+            "<td>" +
+            "<input type='checkbox' name='products[]' value='" +
+            array[0] +
+            "'onclick='check(" +
+            array[0] +
+            ")' id='cbox" +
+            array[0] +
+            "' checked disabled = true class='productsCheck'>" +
+            "</td>" +
+            "<td>" +
+            +cont +
+            "</td>" +
+            "<td>" +
+            array[1] +
+            "</td>" +
+            "<td>" +
+            "<div class='col-md-4'>" +
+            "<div class='form-group'>" +
+            "<input type='number' name='quantity[]' id='" +
+            array[0] +
+            "'class='form-control dataT' required = true>" +
+            "</div>" +
+            "</div>" +
+            "</td>" +
+            "<td>" +
+            "<div class='btn-group'>" +
+            "<a onclick='deleteElement(" +
+            cont +
+            ")' class='btn btn-block btn-danger'>" +
+            "<i class='fa fa-fw fa-trash'>" +
+            "</i>" +
+            "</a>" +
+            "</div>" +
+            "</td>" +
+            "</tr>";
+
+        if (elementsSelect.length == 0) {
+            $("#example tbody").append(htmlTags);
+            elementsSelect.push(array[0]);
+            cont = cont + 1;
+        }
+
+        for (let index = 0; index < elementsSelect.length; index++) {
+            if (validator) break;
+
+            if (elementsSelect[index] == array[0]) {
+                validator = true;
+            }
+        }
+
+        if (!validator) {
+            $("#example tbody").append(htmlTags);
+            elementsSelect.push(array[0]);
+            cont = cont + 1;
+        }
+    });
+});
+
+
+
+function disable() {
+    $(".productsCheck").attr("disabled", false);
+}
+
+function deleteElement(id){
+    $("#fila"+id).remove();
 }
