@@ -1,7 +1,7 @@
 @extends('panel.layout')
 
 @section('content-panel')
-
+<script src="{{asset('js/sweetAlert2/sweetalert.js')}}"></script>
 <div class="content-wrapper">
 
     <section class="content-header" style="padding-bottom: 0px;">
@@ -9,6 +9,7 @@
         <div class="container-fluid">
 
             <div class="row mb-2">
+
 
                 <div class="col-sm-6">
 
@@ -556,7 +557,13 @@ $('#sale').on('click', function(e) {
             $('#action').removeAttr("data-toggle");
             res = 0;
             comanda = 0;
-            swal.fire("!Good job!", "Venta finalizada", "success");
+            Swal.fire({
+                position: 'inherit',
+                icon: 'success',
+                title: 'Venta Realizada con Éxito',
+                showConfirmButton: false,
+                timer: 1500
+            })
 
         });
     } else {

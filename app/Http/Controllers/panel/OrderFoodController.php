@@ -21,18 +21,38 @@ class OrderFoodController extends Controller
 	{
         $orderfood = OrderFoodModel::whereStatus(0)->get();
 		return view('panel.orderfood.index', ['items' => $orderfood]);
-	}
-
+    }
+    
 	public function add() 
 	{
         $products = ProductsModel::all();
         return view('panel.orderfood.form')->with(['orderfood' => new OrderFoodModel(),'products' =>$products,'res'=>0]); 
     }
 
+    public function show(Request $request){
+        $products = ProductsModel::all();
+        $orderfood =OrderFoodModel::find($request->id);
+        
+        $productsList =json_decode($orderfood->products);
+        $quantityList=json_decode($orderfood->quantity);
+        $res = array();
+        for($j = 0; $j<sizeof($productsList);$j++){
+            $product = ProductsModel::find($productsList[$j]);
+            array_push($res,["nombre"=>$product->name,"precio"=>$product->price,"cantidad"=>$quantityList[$j],"product_id"=>$product->id]);
+        }
+        $nombre = [];
+        foreach ($res as $key => $value) {
+            array_push($nombre, $value['nombre']);
+            array_push($nombre, $value['cantidad']);
+        }
+        return ($res);
+    }
+    
     public function edit($id)
     {
         $products = ProductsModel::all();
         $orderfood =OrderFoodModel::find($id);
+        
         $productsList =json_decode($orderfood->products);
         $quantityList=json_decode($orderfood->quantity);
         $res = array();
@@ -67,16 +87,19 @@ class OrderFoodController extends Controller
         $orderfood->products =json_encode($request->input('products'));
         $orderfood->quantity =json_encode(array_values(array_filter($request->input('quantity'))));
         $names = $orderfood;
+        $notes = $request->input('notes');
         $orderfood->save();
         
         
         session()->flash('messages', 'success|Comanda registrada correctamente.' );
-        $this->ticketComanda($names);
+        $this->ticketComanda($names , $notes);
         return redirect()->route('orderfood');
     }
 
     
-    public function ticketComanda($names){
+    public function ticketComanda($names , $notes){
+
+        
         
         $nombre_impresora = "POS"; 
 
@@ -168,7 +191,19 @@ $printer->text("-----------------------------"."\n");
 	los productos, ahora va el total
 */
 $printer->text("-----------------------------"."\n");
-;
+
+if ($notes!=null)
+{
+    $printer->setTextSize(1,2);
+    $printer->text("\n"."Notas Extras" . "\n");
+    $printer->setTextSize(1,1);
+    $printer->text($notes);
+    $printer->text("\n-----------------------------"."\n");
+}else
+{
+    
+}
+
 
 
 /*

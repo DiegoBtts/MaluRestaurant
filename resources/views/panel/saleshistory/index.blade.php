@@ -10,12 +10,12 @@
 
             <div class="row mb-2">
 
-                <div class="col-sm-6">
+                <div class="col-sm-3">
 
                     <h1>Historial de Ventas</h1>
 
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-9">
 
                     <ol class="breadcrumb float-sm-right">
 
@@ -183,7 +183,6 @@
     </div>
 
 </div>
-
 
 <script src="{{ asset('js/saleshistory.js')}}"></script>
 <script src="{{asset('js/dataTables.responsive.min.js')}}">

@@ -10,13 +10,13 @@
 
             <div class="row mb-2">
 
-                <div class="col-sm-6">
+                <div class="col-sm-1">
 
                     <h1>Menu</h1>
 
                 </div>
 
-                <div class="col-sm-6">
+                <div class="col-sm-11">
 
                     <ol class="breadcrumb float-sm-right">
 

@@ -150,6 +150,10 @@ Route::group(['middleware' => 'auth' ], function()
         'uses' => 'Panel\OrderFoodController@edit',
         'as'=> 'orderfood.edit'
     ]);
+    Route::post('/orderfood/show', [
+        'uses' => 'Panel\OrderFoodController@show',
+        'as'=> 'orderfood.show'
+    ]);
 
     Route::get('/orderfood/{id}/delete', [
         'uses' => 'Panel\OrderFoodController@delete',

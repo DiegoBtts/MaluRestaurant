@@ -27,7 +27,7 @@
 
                     <ol class="breadcrumb float-sm-right">
 
-                        <li class="breadcrumb-item"><a href="">Comandas</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('orderfood')}}">Comandas</a></li>
                         <li class="breadcrumb-item active">Crear Comanda</li>
 
                     </ol>
@@ -272,13 +272,18 @@
                                 </div>
 
 
+
+
+
+
+
+
                             <table id="example" class="table table-striped table-bordered" style="width:100%">
-                                <thead>
+                                <thead >
                                     <tr>
                                         <th><input type="checkbox" onclick="checkAll(this)" id="allProducts"
                                                 name="products[]" value="{{ $orderfood->productslist}}">
                                         </th>
-                                        <th style="width: 10px">#</th>
                                         <th>Producto</th>
                                         <th>Cantidad</th>
                                         <th>Acciones</th>
@@ -286,13 +291,51 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                @if (!is_null($orderfood->id))
 
-                                    
+                                @foreach($res as $key => $value)
+                                <tr id="fila{{$value['product_id']}}">
+                                        <td>
+                                        <input type="checkbox" name="products[]" value="{{$value['product_id']}}" onclick="check({{$value['product_id']}})" id="cbox{{$value['product_id']}}" checked="true" disabled="true" class="productsCheck" required="true">
+                                        </td>
+                                        <td>
+                                            {{$value['nombre']}}
+                                        </td>
+                                        <td>
+                                       <div class="col-md-4">
+                                           <div class="form-group">
+                                           <input type="number" name="quantity[]" id="{{$value['product_id']}}" class="form-control dataT" required="true">
+                                            </div>
+                                        </div>
+                                        </td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <a onclick="deleteElement({{$value['product_id']}})" class="btn btn-block btn-danger">
+                                                    <i class="fa fa-fw fa-trash">
+                                                        </i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                    </tr>
+                                    @endforeach
+
+
+                                @endif
+                                
+                        
+
                                 </tbody>
                             </table>
                         </div>
 
 
+                    </div>
+
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>Notas</label>
+                                <textarea class="form-control" rows="3" placeholder="Agregue notas extras" id="notes" name="notes"></textarea>
+                        </div>
                     </div>
 
 

@@ -1,3 +1,4 @@
+var elementsSelect = [];
 $(document).ready(function () {
     // $(".mdb-select").materialSelect();
     if ($("#titulo").text() == "Nuevo Comanda") {
@@ -7,6 +8,12 @@ $(document).ready(function () {
     $(".mi-selector").select2({
         theme: "classic",
         placeholder: "Selecciona un producto",
+    });
+    $("#comandTable").dataTable({
+        ordering: false,
+        paging: false,
+        info: false,
+        searching: false,
     });
 });
 
@@ -98,8 +105,6 @@ function CheckValuesOrder(value) {
     }
 }
 
-function CheckValuesRes() {}
-
 function ActualDate() {
     var date = new Date();
     var month = date.getMonth();
@@ -129,7 +134,6 @@ function ActualDate() {
     $("#hour").prop("disabled", true);
 }
 
-
 function btnTables(value, id) {
     $("#" + value).prop("checked", true);
     $("#radonly" + id).css("background-color", "red");
@@ -158,18 +162,18 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     var cont = 1;
-    var elementsSelect = [];
-    $("#example .dataTables_empty").remove();
-    $("#example .odd").remove();
+    if ($("#titulo").text() == "Nuevo Comanda") {
+        $("#example .dataTables_empty").remove();
+        $("#example .odd").remove();
+    }
 
     $(".mi-selector").change(function () {
         var value = $(".mi-selector").val();
         var array = value.split(",");
         var validator = false;
-
         var htmlTags =
             "<tr id='fila" +
-            cont +
+            array[0] +
             "'>" +
             "<td>" +
             "<input type='checkbox' name='products[]' value='" +
@@ -178,10 +182,7 @@ $(document).ready(function () {
             array[0] +
             ")' id='cbox" +
             array[0] +
-            "' checked disabled = true class='productsCheck'>" +
-            "</td>" +
-            "<td>" +
-            +cont +
+            "' checked disabled = true class='productsCheck' required = true>" +
             "</td>" +
             "<td>" +
             array[1] +
@@ -198,7 +199,7 @@ $(document).ready(function () {
             "<td>" +
             "<div class='btn-group'>" +
             "<a onclick='deleteElement(" +
-            cont +
+            array[0] +
             ")' class='btn btn-block btn-danger'>" +
             "<i class='fa fa-fw fa-trash'>" +
             "</i>" +
@@ -206,7 +207,7 @@ $(document).ready(function () {
             "</div>" +
             "</td>" +
             "</tr>";
-
+        datatableIsNull();
         if (elementsSelect.length == 0) {
             $("#example tbody").append(htmlTags);
             elementsSelect.push(array[0]);
@@ -229,12 +230,40 @@ $(document).ready(function () {
     });
 });
 
-
-
 function disable() {
     $(".productsCheck").attr("disabled", false);
 }
 
-function deleteElement(id){
-    $("#fila"+id).remove();
+function deleteElement(id) {
+    $("#fila" + id).remove();
+    removeItemFromArr(id);
+    datatableIsNull();
+}
+
+function datatableIsNull() {
+    // var validatorDataTable =
+    //     "<tr id='tentacles'><td><input type='number' required = 'true'></td></tr>";
+    // if ($("#example tr").length == 1) {
+    //     $("#example tbody").append(validatorDataTable);
+    //     $("#tentacles").hide("fast");
+    // } else {
+    //     $("#tentacles").remove();
+    // }
+}
+
+function removeItemFromArr(item) {
+    for (let index = 0; index < elementsSelect.length; index++) {
+        if (elementsSelect[index] == item) {
+            elementsSelect.splice(index, 1);
+        }
+        console.log(elementsSelect[index]);
+    }
+
+    for (let index = 0; index < elementsSelect.length; index++) {
+        console.log(elementsSelect[index]);
+    }
+}
+
+function clearDatatable() {
+    $("#comandTable").dataTable().fnClearTable();
 }

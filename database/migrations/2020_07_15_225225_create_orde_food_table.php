@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\Ordefood;
 
 class CreateOrdeFoodTable extends Migration
 {
@@ -13,6 +14,10 @@ class CreateOrdeFoodTable extends Migration
      */
     public function up()
     {
+        Orderfood::create([
+            
+        ]);
+        
         Schema::create('orderfood', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->date("date");

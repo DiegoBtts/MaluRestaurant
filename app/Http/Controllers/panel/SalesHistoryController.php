@@ -34,6 +34,12 @@ class SalesHistoryController extends Controller
   }
   
   public function ticket(Request $request){
+	  $total =0;
+      $date = strftime("%Y-%m-%d");
+      $sales = SaleModel::where('created_at','like','%'.$date.'%')->get();
+        foreach($sales as $s){
+          $total =$total +$s->total;  
+        }
         
         $nombre_impresora = "POS"; 
 
@@ -85,20 +91,27 @@ $printer->text("-----------------------------"."\n");
 	/*Alinear a la izquierda para la cantidad y el nombre*/
 $printer->setTextSize(2,1);
     $printer->text("$". $request['total']."\n\n");
-   $printer->setTextSize(1,1);
+    $printer->setTextSize(1,1);
 
 /*
 	Terminamos de imprimir
 	los productos, ahora va el total
 */
 $printer->text("-----------------------------"."\n");
-
+        $printer->setTextSize(2,1);
+		$printer->text("~~Ventas del Día~~.\n");
+		$printer->setTextSize(1,1);
+		$printer->text("\n# venta   Total\n");
+		foreach($sales as $clave => $sale){
+          $printer->text($sale['id']."        $".$sale['total']."\n");
+        }
 
 
 /*
 	Podemos poner también un pie de página
 */
 $printer->setJustification(Printer::JUSTIFY_CENTER);
+$printer->text("-----------------------------"."\n");
 $printer->text("Exito Equipo....\n");
 
 
