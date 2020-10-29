@@ -14,9 +14,6 @@ class CreateOrdeFoodTable extends Migration
      */
     public function up()
     {
-        Orderfood::create([
-            
-        ]);
         
         Schema::create('orderfood', function (Blueprint $table) {
             $table->bigIncrements('id');
