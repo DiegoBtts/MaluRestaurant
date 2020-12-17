@@ -180,9 +180,9 @@ class ProductSeeder extends Seeder
               'price'=> '15',
             ]];
 
-            foreach ($data as $instituto) 
+            foreach ($data as $product) 
             {
-                ProductsModel::create($instituto);
+                ProductsModel::create($product);
             }
           $this->command->info("List Products Created -> ".count($data)." Products");
           $this->command->info('Done!');
