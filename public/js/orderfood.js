@@ -161,7 +161,7 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-    var cont = 1;    
+    var cont = 1;
 
     $(".mi-selector").change(function () {
         var value = $(".mi-selector").val();
@@ -210,6 +210,8 @@ $(document).ready(function () {
                 // console.log($("#cbox"+array[0]).val());
 
                 if (cont == 1 || validatorExistent == undefined) {
+                    var id = t.row(this).id();
+                    console.log(id);
                     t.row
                         .add([
                             checkboxElement,
@@ -218,9 +220,10 @@ $(document).ready(function () {
                             inputUnitPrice,
                             buttonDeleteElement,
                         ])
-                        .draw(false);
+                        .draw(false)
+                        .node().id = "row"+array[0];
                 }
-                
+
             counter++;
             cont++;
     });
@@ -231,9 +234,10 @@ function disable() {
 }
 
 function deleteElement(id) {
-    $("#fila" + id).remove();
+    let table = $("#example").DataTable();
+    table.row("#row"+id).remove().draw();
+
     removeItemFromArr(id);
-    datatableIsNull();
 }
 
 function datatableIsNull() {
