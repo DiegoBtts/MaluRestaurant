@@ -161,84 +161,68 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-    var cont = 1;
-    if ($("#titulo").text() == "Nuevo Comanda") {
-        $("#example .dataTables_empty").remove();
-        $("#example .odd").remove();
-    }
+    var cont = 1;    
 
     $(".mi-selector").change(function () {
         var value = $(".mi-selector").val();
         var array = value.split(",");
-        console.log(array[3]);
         var validator = false;
-        var htmlTags =
-            "<tr id='fila" +
-            array[0] +
-            "'>" +
-            "<td>" +
+
+        var t = $("#example").DataTable();
+        var counter = 1;
+        let validatorExistent = $("#cbox"+array[0]).val();
+        let checkboxElement =
             "<input type='checkbox' name='products[]' value='" +
             array[0] +
             "'onclick='check(" +
             array[0] +
             ")' id='cbox" +
             array[0] +
-            "' checked disabled = true class='productsCheck' required = true>" +
-            "</td>" +
-            "<td>" +
-            array[1] +
-            "</td>" +
-            "<td>" +
+            "' checked disabled = true class='productsCheck' required = true >";
+        let nameProducts = array[1];
+        let inputQuantity =
             "<div class='col-md-4'>" +
-            "<div class='form-group'>" +
-            "<input type='number' name='quantity[]' id='" +
-            array[0] +
-            "'class='form-control dataT' required = true>" +
-            "</div>" +
-            "</div>" +
-            "</td>" +
-            "<td>" +
+                "<div class='form-group'>" +
+                "<input type='number' name='quantity[]' id='" +
+                array[0] +
+                "'class='form-control dataT' required = true>" +
+                "</div>" +
+                "</div>";
+        let inputUnitPrice =
             "<div class='col-md-4'>" +
-            "<div class='form-group'>" +
-            "<input type='number' id='price" +
-            array[0] +
-            "'class='form-control dataT' value='" +
-            array[3] +
-            "' disabled = true >" +
-            "</div>" +
-            "</div>" +
-            "</td>" +
-            "<td>" +
+                "<div class='form-group'>" +
+                "<input type='number' id='price" +
+                array[0] +
+                "'class='form-control dataT' value='" +
+                array[3] +
+                "' disabled = true >" +
+                "</div>" +
+                "</div>";
+        let buttonDeleteElement =
             "<div class='btn-group'>" +
-            "<a onclick='deleteElement(" +
-            array[0] +
-            ")' class='btn btn-block btn-danger'>" +
-            "<i class='fa fa-fw fa-trash'>" +
-            "</i>" +
-            "</a>" +
-            "</div>" +
-            "</td>" +
-            "</tr>";
-        datatableIsNull();
-        if (elementsSelect.length == 0) {
-            $("#example tbody").append(htmlTags);
-            elementsSelect.push(array[0]);
-            cont = cont + 1;
-        }
+                "<a onclick='deleteElement(" +
+                array[0] +
+                ")' class='btn btn-block btn-danger'>" +
+                "<i class='fa fa-fw fa-trash'>" +
+                "</i>" +
+                "</a>" +
+                "</div>";
+                // console.log($("#cbox"+array[0]).val());
 
-        for (let index = 0; index < elementsSelect.length; index++) {
-            if (validator) break;
-
-            if (elementsSelect[index] == array[0]) {
-                validator = true;
-            }
-        }
-
-        if (!validator) {
-            $("#example tbody").append(htmlTags);
-            elementsSelect.push(array[0]);
-            cont = cont + 1;
-        }
+                if (cont == 1 || validatorExistent == undefined) {
+                    t.row
+                        .add([
+                            checkboxElement,
+                            nameProducts,
+                            inputQuantity,
+                            inputUnitPrice,
+                            buttonDeleteElement,
+                        ])
+                        .draw(false);
+                }
+                
+            counter++;
+            cont++;
     });
 });
 
@@ -262,7 +246,6 @@ function datatableIsNull() {
     //     $("#tentacles").remove();
     // }
 }
-
 function removeItemFromArr(item) {
     for (let index = 0; index < elementsSelect.length; index++) {
         if (elementsSelect[index] == item) {
