@@ -264,7 +264,7 @@
                                             <select class="selectpicker form-control mi-selector" name='marcas'>
                                                 <option value='' disabled selected>Seleccionar un producto</option>
                                                 @foreach($products as $key => $value)
-                                                <option value="{{$value->id}},{{$value->name}},{{$key}}">{{$value->name}}</option>
+                                                <option value="{{$value->id}},{{$value->name}},{{$key}},{{$value->price}}">{{$value->name}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -286,6 +286,7 @@
                                         </th>
                                         <th>Producto</th>
                                         <th>Cantidad</th>
+                                        <th>precio U</th>
                                         <th>Acciones</th>
 
                                     </tr>

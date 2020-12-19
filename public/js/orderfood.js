@@ -170,6 +170,7 @@ $(document).ready(function () {
     $(".mi-selector").change(function () {
         var value = $(".mi-selector").val();
         var array = value.split(",");
+        console.log(array[3]);
         var validator = false;
         var htmlTags =
             "<tr id='fila" +
@@ -193,6 +194,17 @@ $(document).ready(function () {
             "<input type='number' name='quantity[]' id='" +
             array[0] +
             "'class='form-control dataT' required = true>" +
+            "</div>" +
+            "</div>" +
+            "</td>" +
+            "<td>" +
+            "<div class='col-md-4'>" +
+            "<div class='form-group'>" +
+            "<input type='number' id='price" +
+            array[0] +
+            "'class='form-control dataT' value='" +
+            array[3] +
+            "' disabled = true >" +
             "</div>" +
             "</div>" +
             "</td>" +
